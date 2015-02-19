@@ -16,18 +16,14 @@ import com.desafio.app.service.MarcaService;
 @SessionAttributes("marca")
 public class MarcaController {
 	
-	public MarcaController() {
-		// TODO Auto-generated constructor stub
-	}
-	
 	@Autowired
 	private MarcaService marcaService;
 	
 	@RequestMapping(value = "/marca", method = RequestMethod.GET)
-	public String marca(Model model) {
+	public String marca() {
 		Marca marca = new Marca();
 		marca.setDescricao("marcaTeste");
-		model.addAttribute("marca", marca);
+		marcaService.save(marca);
 		return "home";
 	}
 	
