@@ -13,11 +13,16 @@ public class MarcaRepositoryImpl implements MarcaRepository {
 	@PersistenceContext
 	private EntityManager entityManager;
 	
-	@Override 
+	@Override
 	public Marca save(Marca marca) {
 		entityManager.persist(marca);
 		System.out.println("Marca salvo com sucesso!");
 		return marca;
+	}
+
+	@Override
+	public Marca find(Long id) {
+		return entityManager.find(Marca.class, id);
 	}
 
 }
