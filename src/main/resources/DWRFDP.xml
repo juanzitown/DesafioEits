@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<dwr:controller id="dwrController" debug="true" />
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="alwaysUseFullPath" value="true" />
+		<property name="mappings">
+			<props>
+				<prop key="/dwr/**/*">dwrController</prop>
+			</props>
+		</property>
+	</bean>
+	<dwr:configuration>
+	</dwr:configuration>
+	<bean id="fooService" class="com.amol.service.FooService">
+		<property name="fooDao" ref="fooDao" />
+		<dwr:remote javascript="fooService">
+			<dwr:include method="getFoo" />
+			<dwr:convert type="bean" class="com.amol.domain.Foo">
+				<dwr:include method="description" />
+				<dwr:include method="foo_id" />
+			</dwr:convert>
+		</dwr:remote>
+	</bean>
+
+</beans>

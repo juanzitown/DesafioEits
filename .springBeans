@@ -8,7 +8,7 @@
 	<enableImports><![CDATA[true]]></enableImports>
 	<configs>
 		<config>src/main/resources/jpaContext.xml</config>
-		<config>src/main/resources/beanConfig.xml</config>
+		<config>src/main/resources/DWRFDP.xml</config>
 	</configs>
 	<autoconfigs>
 		<config>src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml</config>
