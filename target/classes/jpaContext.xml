@@ -19,7 +19,7 @@
 		<property name="packagesToScan" value="com.desafio.app.model"/>
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-<!-- 				<property name="generateDdl" value="true"/> -->
+				<property name="generateDdl" value="true"/>
 				<property name="showSql" value="true"/>
 			</bean>
 		</property>
@@ -37,7 +37,7 @@
 		<property name="entityManagerFactory" ref="entityManagerFactory"/>
 	</bean>
 	
-	<tx:annotation-driven transaction-manager="transactionManager"/>
+<!-- 	<tx:annotation-driven transaction-manager="transactionManager"/> -->
 	
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
