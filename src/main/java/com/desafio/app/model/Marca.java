@@ -31,4 +31,8 @@ public class Marca {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	public String toString() {
+		return descricao;
+	}
 }

@@ -10,34 +10,31 @@
    <script type='text/javascript' src="/app/dwr/util.js"></script>
  <script type="text/javascript" src="/app/dwr/interface/marcaServiceDwr.js"></script>
   
- <title>Spring MVC - DWR Integration Tutorial</title>
+ <title>Spring MVC - DWR Integration</title>
 </head>
 <body>
  
-<h3>Spring MVC - DWR Integration Tutorial</h3>
-<h4>AJAX version</h4>
+<h3>Spring MVC - DWR Integration</h3>
+<h4>Desafio Eits</h4>
  
-Demo 1
+Cadastrar Marca
 <div style="border: 1px solid #ccc; width: 250px;">
- Add Two Numbers:
+ Descricao: <input id="descricao" type="text" size="20">
  
- <input id="inputNumber1" type="text" size="5"> +
- <input id="inputNumber2" type="text" size="5">
- <input type="submit" value="Add" onclick="add()" />
+ <input type="submit" value="Cadastrar" onclick="saveMarca()" />
  
- Sum: <span id="sum">(Result will be shown here)</span>
+ Resultado: <span id="marcaDescricao"></span>
 </div>
  
 <script type="text/javascript">
  // Retrieves the matching value
  // Delegates to the dwrService
- function add() {
+ function saveMarca() {
   // Retrieve value of text inputs
-  var operand1 = dwr.util.getValue("inputNumber1");
-  var operand2 = dwr.util.getValue("inputNumber2");
+  var descricao = dwr.util.getValue("descricao");
    
   // Pass two numbers, a callback function, and error function
-  marcaServiceDwr.add(operand1, operand2, {
+  marcaServiceDwr.saveMarca(descricao, {
    callback : handleAddSuccess,
    errorHandler : handleAddError
   });
@@ -46,12 +43,12 @@ Demo 1
  // data contains the returned value
  function handleAddSuccess(data) {
   // Assigns data to result id
-  dwr.util.setValue("sum", data);
+  dwr.util.setValue("marcaDescricao", "Salvo com Sucesso!");
  }
  
  function handleAddError() {
   // Show a popup message
-  alert("We can't add those values!");
+  alert("Não foi possivel cadastrar Marca");
  }
 </script>
  
