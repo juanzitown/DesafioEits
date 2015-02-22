@@ -19,6 +19,6 @@ public class MarcaController {
 		Marca marca = new Marca();
 		marca.setDescricao("marcaTeste");
 		marcaService.save(marca);
-		return "home";
+		return "test";
 	}
 }
