@@ -4,5 +4,6 @@ import com.desafio.app.model.Produto;
 
 public interface ProdutoService {
 
-	public Produto save(Produto produto);
+	public Produto saveProduto(Produto produto);
+	public Produto findProduto(Long id);
 }

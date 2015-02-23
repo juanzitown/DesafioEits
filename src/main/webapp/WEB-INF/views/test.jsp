@@ -42,8 +42,9 @@ Cadastrar Marca
  
  // data contains the returned value
  function handleAddSuccess(data) {
+	 console.log(data);
   // Assigns data to result id
-  dwr.util.setValue("marcaDescricao", "Salvo com Sucesso!");
+  dwr.util.setValue("marcaDescricao", data.descricao+" salvo com Sucesso!");
  }
  
  function handleAddError() {

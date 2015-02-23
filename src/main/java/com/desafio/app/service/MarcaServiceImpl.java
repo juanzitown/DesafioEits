@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.desafio.app.model.Marca;
 import com.desafio.app.repository.MarcaRepository;
 
-@Service("MarcaService")
+@Service
 @RemoteProxy(name="marcaServiceDwr")
 @Transactional
 public class MarcaServiceImpl implements MarcaService{
@@ -27,7 +27,7 @@ public class MarcaServiceImpl implements MarcaService{
 	}
 
 	@Override
-	public Marca find(Long id) {
+	public Marca findMarca(Long id) {
 		return marcaRepository.find(id);
 	}
 

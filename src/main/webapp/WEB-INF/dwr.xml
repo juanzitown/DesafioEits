@@ -4,8 +4,12 @@
 
 <dwr>
   <allow>
-    <create creator="new" javascript="marcaServiceDwr">
-      <param name="class" value="com.desafio.app.service.MarcaServiceImpl"/>
+  
+  <convert converter="bean" match="com.desafio.app.model.*"/>
+  
+    <create creator="spring" javascript="marcaServiceDwr">
+      <param name="beanName" value="marcaServiceImpl"/>
+      
     </create>
   </allow>
 </dwr>
