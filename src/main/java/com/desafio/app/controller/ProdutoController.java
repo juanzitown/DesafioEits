@@ -21,10 +21,10 @@ public class ProdutoController {
 	@RequestMapping(value = "/produto", method = RequestMethod.GET)
 	public String produto() {
 		Produto produto = new Produto();
-		Marca marca = marcaService.find(1L);
+		Marca marca = marcaService.findMarca(1L);
 		produto.setDescricao("Produto01");
 		produto.setMarca(marca);
-		produtoService.save(produto);
+		produtoService.saveProduto(produto);
 		return "home";
 	}
 	
