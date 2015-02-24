@@ -5,14 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class MarcaController {
+public class SecurityController {
 	
-	@RequestMapping(value = "/marca", method = RequestMethod.GET)
-	public String marca() {
-		return "test";
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String loginForm() {
+		return "loginForm";
 	}
-	
-	
-	
-	
+
 }

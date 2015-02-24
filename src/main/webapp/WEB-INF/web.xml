@@ -6,16 +6,28 @@
 	<!-- The definition of the Root Spring Container shared by all Servlets 
 		and Filters -->
 
+	<welcome-file-list>
+		<welcome-file>/home.jsp</welcome-file>
+	</welcome-file-list>
+
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/spring/root-context.xml classpath:/jpaContext.xml</param-value>
+		<param-value>/WEB-INF/spring/root-context.xml classpath:/jpaContext.xml /WEB-INF/spring/security.xml</param-value>
 	</context-param>
 
-	<!-- <context-param> -->
-	<!-- <param-name>ContextConfigLocation</param-name> -->
-	<!-- <param-value>classpath:/beanConfig.xml</param-value> -->
-	<!-- </context-param> -->
-
+	<!-- SPRING SECURITY -->
+	<filter>
+         <filter-name>springSecurityFilterChain</filter-name>
+         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+<!--         <dispatcher>REQUEST</dispatcher> -->
+<!--         <dispatcher>ERROR</dispatcher> -->
+    </filter-mapping>
+    
 
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
