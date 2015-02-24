@@ -2,6 +2,10 @@
 <html>
 <head>
 <title>Login Page</title>
+
+<script type='text/javascript' src="/app/dwr/engine.js"></script>
+<script type='text/javascript' src="/app/dwr/util.js"></script>
+<script type="text/javascript" src="/app/dwr/interface/usuarioServiceDwr.js"></script>
 <style>
 .error {
 	padding: 15px;
@@ -12,7 +16,7 @@
 	background-color: #f2dede;
 	border-color: #ebccd1;
 }
- 
+
 .msg {
 	padding: 15px;
 	margin-bottom: 20px;
@@ -22,7 +26,7 @@
 	background-color: #d9edf7;
 	border-color: #bce8f1;
 }
- 
+
 #login-box {
 	width: 300px;
 	padding: 20px;
@@ -35,30 +39,56 @@
 </style>
 </head>
 
-<body onload='document.loginForm.username.focus();'>
- 
+<script type="text/javascript">
+
+	function login() {
+		var username = dwr.util.getValue("username");
+		var password = dwr.util.getValue("password");
+		
+		usuarioServiceDwr.findUser(username, password, {callback : handleAddSuccess, errorHandler : handleAddError});
+		 
+		 // data contains the returned value
+		 function handleAddSuccess(data) {
+			 console.log(data);
+		  // Assigns data to result id
+		  dwr.util.setValue("resultado", " logado com Sucesso!");
+		 }
+		 
+		 function handleAddError() {
+		  // Show a popup message
+		  alert("Não foi possivel cadastrar Marca");
+		 }
+
+	}
+</script>
+
+<body onload='document.formLogin.username.focus();'>
+
 	<h1>Spring Security Custom Login Form (XML)</h1>
- 
+
 	<div id="divLogin">
- 
+
 		<h3>Login with Username and Password</h3>
 
-		<form name='formLogin' action="" method='POST'>
-		  <table>
-			<tr>
-				<td>User:</td>
-				<td><input type="text" name="username" value=''></td>
-			</tr>
-			<tr>
-				<td>Password:</td>
-				<td><input type="password" name="password" /></td>
-			</tr>
-			<tr>
-				<td colspan='2'><input name="submit" type="submit" value="submit" /></td>
-			</tr>
-		  </table>
+		<form name="formLogin" action="j_spring_security_check" method="POST">
+			<table>
+				<tr>
+					<td>User:</td>
+					<td><input type="text" name="username" value=''></td>
+				</tr>
+				<tr>
+					<td>Password:</td>
+					<td><input type="password" name="password" /></td>
+				</tr>
+				<tr>
+					<td colspan='2'><input name="submit" type="submit"
+						onclick="login()" value="Login" /></td>
+				</tr>
+			</table>
+			<br>
+			<span id="resultado"></span>
 		</form>
 	</div>
-	
+
 </body>
 </html>

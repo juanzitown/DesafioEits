@@ -9,7 +9,11 @@
   
     <create creator="spring" javascript="marcaServiceDwr">
       <param name="beanName" value="marcaServiceImpl"/>
-      
     </create>
+    
+    <create creator="spring" javascript="usuarioServiceDwr">
+      <param name="beanName" value="usuarioServiceImpl"/>
+    </create>
+    
   </allow>
 </dwr>

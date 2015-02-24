@@ -13,6 +13,7 @@ import com.desafio.app.repository.UserRepository;
 @RemoteProxy(name="usuarioServiceDwr")
 @Transactional
 public class UsuarioServiceImpl implements UsuarioService{
+	
 	@Autowired
 	private UserRepository userRepository;
 
@@ -21,7 +22,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 		Usuario usuario = new Usuario();
 		usuario.setUsuario(username);
 		usuario.setPassword(password);
-		return userRepository.findUser(usuario);
+		return userRepository.findUser(1L);
 	}
 
 	@Override

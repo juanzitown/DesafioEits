@@ -4,12 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.desafio.app.model.Usuario;
 
-@Component
-public class AuthenticationProviderImpl implements AuthenticationProvider{
+@Service
+public class AuthenticationProviderServiceImpl implements AuthenticationProvider{
 	
 	@Autowired
 	private UsuarioService usuarioService;

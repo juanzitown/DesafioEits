@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bean:beans xmlns:bean="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/security"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
-     http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
-     http://www.springframework.org/schema/security
-     http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
 
-	<http auto-config="true">
-		<intercept-url pattern="/**" access="ROLE_USER" />
-<!-- 		<intercept-url pattern="/marca/**" access="isAuthenticated()" /> -->
-	</http>
 	
-<!-- 	<bean id="AuthenticationProviderServiceImpl" class="com.desafio.service.AuthenticationProviderServiceImpl" -->
 	
-	<authentication-manager>
-		<authentication-provider ref="AuthenticationProviderImpl">
-			<user-service>
-				<user name="admin" password="admin" authorities="ROLE_USER" />
-			</user-service>
-		</authentication-provider>
-	</authentication-manager>
+	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:jdbc-user-service data-source-ref="dataSource"
+				users-by-username-query="select username, password from usuario where username=?"
+				authorities-by-username-query="select username, role from role_usuario, usuario where usuario.idRoleUsuario = role_usuario.id AND usuario.username=?"/>
+<!-- 			<user-service> -->
+<!-- 				<user name="admin" password="admin" authorities="ROLE_USER" /> -->
+<!-- 			</user-service> -->
+		</security:authentication-provider>
+	</security:authentication-manager>
+	
+	<security:http auto-config="true">
+		<security:intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" />
+	</security:http>
 
 </bean:beans>
 

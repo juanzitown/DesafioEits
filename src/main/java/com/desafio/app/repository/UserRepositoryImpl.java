@@ -3,8 +3,11 @@ package com.desafio.app.repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.stereotype.Repository;
+
 import com.desafio.app.model.Usuario;
 
+@Repository
 public class UserRepositoryImpl implements UserRepository {
 
 	@PersistenceContext
@@ -18,7 +21,7 @@ public class UserRepositoryImpl implements UserRepository {
 	}
 
 	@Override
-	public Usuario findUser(Usuario usuario) {
-		return entityManager.find(Usuario.class, usuario);
+	public Usuario findUser(Long id) {
+		return entityManager.find(Usuario.class, id);
 	}
 }
