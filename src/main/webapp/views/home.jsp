@@ -3,16 +3,10 @@
 <html>
 <head>
 <title>Hello AngularJS</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+	<script	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+	<script	src="views/js/hello.js"></script>
 </head>
 
-<script type="text/javascript">
-	function personController($scope) {
-// 	    $scope.firstName= "John";
-// 	    $scope.lastName= "Doe";
-	}
-</script>
 
 <body>
 	<h1>Hello world!</h1>
