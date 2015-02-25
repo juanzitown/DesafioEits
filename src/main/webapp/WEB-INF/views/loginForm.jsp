@@ -41,25 +41,25 @@
 
 <script type="text/javascript">
 
-	function login() {
-		var username = dwr.util.getValue("username");
-		var password = dwr.util.getValue("password");
+// 	function login() {
+// 		var username = dwr.util.getValue("username");
+// 		var password = dwr.util.getValue("password");
 		
-		usuarioServiceDwr.findUser(username, password, {callback : handleAddSuccess, errorHandler : handleAddError});
+// 		usuarioServiceDwr.findUser(username, password, {callback : handleAddSuccess, errorHandler : handleAddError});
 		 
-		 // data contains the returned value
-		 function handleAddSuccess(data) {
-			 console.log(data);
-		  // Assigns data to result id
-		  dwr.util.setValue("resultado", " logado com Sucesso!");
-		 }
+// 		 // data contains the returned value
+// 		 function handleAddSuccess(data) {
+// 			 console.log(data);
+// 		  // Assigns data to result id
+// 		  dwr.util.setValue("resultado", " logado com Sucesso!");
+// 		 }
 		 
-		 function handleAddError() {
-		  // Show a popup message
-		  alert("Não foi possivel cadastrar Marca");
-		 }
+// 		 function handleAddError() {
+// 		  // Show a popup message
+// 		  alert("Não foi possivel cadastrar Marca");
+// 		 }
 
-	}
+// 	}
 </script>
 
 <body onload='document.formLogin.username.focus();'>
