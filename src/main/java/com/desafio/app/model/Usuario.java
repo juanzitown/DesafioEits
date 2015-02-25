@@ -10,7 +10,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
+
 @Entity
+@Audited
 @Table(name="usuario")
 public class Usuario implements Serializable{
 	
@@ -31,6 +34,8 @@ public class Usuario implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="idRoleUsuario")
 	private RoleUsuario roleUsuario;
+	
+	private boolean enabled;
 	
 	public Usuario() {
 		// default no-arg
@@ -59,6 +64,34 @@ public class Usuario implements Serializable{
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public RoleUsuario getRoleUsuario() {
+		return roleUsuario;
+	}
+
+	public void setRoleUsuario(RoleUsuario roleUsuario) {
+		this.roleUsuario = roleUsuario;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }

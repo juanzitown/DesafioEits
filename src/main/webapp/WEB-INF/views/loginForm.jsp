@@ -81,8 +81,7 @@
 					<td><input type="password" name="password" /></td>
 				</tr>
 				<tr>
-					<td colspan='2'><input name="submit" type="submit"
-						onclick="login()" value="Login" /></td>
+					<td colspan='2'><input name="submit" type="submit" value="Login" /></td>
 				</tr>
 			</table>
 			<br>

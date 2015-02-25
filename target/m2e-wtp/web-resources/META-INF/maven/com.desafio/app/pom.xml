@@ -147,6 +147,12 @@
 			<version>4.1.1.RELEASE</version>
 		</dependency>
 
+		<!-- Spring ENVERS -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-envers</artifactId>
+			<version>0.2.0.RELEASE</version>
+		</dependency>
 
 		<!-- DWR -->
 		<dependency>
@@ -180,7 +186,7 @@
 		</dependency>
 	</dependencies>
 
-	<!--  Repositorios DWR -->
+	<!-- Repositorios DWR -->
 	<repositories>
 		<repository>
 			<!-- Please consider setting up your own on-site repository proxy such 

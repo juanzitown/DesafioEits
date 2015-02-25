@@ -34,10 +34,6 @@
 		
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 
-	<!-- <jpa:repositories base-package="br.com.emanuelvictor.funcionario.repository" 
+	<!-- <jpa:repositories base-package="" 
 		/> -->
-		
-		<bean id="AuthenticationProviderServiceImpl" class="com.desafio.app.service.AuthenticationProviderServiceImpl"/>
-	
-
 </beans>
