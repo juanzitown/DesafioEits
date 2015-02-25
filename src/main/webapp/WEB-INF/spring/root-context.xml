@@ -12,8 +12,8 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
-
-
+	
+	
 	<context:annotation-config />
 	<context:component-scan base-package="com.desafio.app" />
 	
@@ -34,7 +34,6 @@
 		
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 
-	<!-- <jpa:repositories base-package="br.com.emanuelvictor.funcionario.repository" 
+	<!-- <jpa:repositories base-package="" 
 		/> -->
-
 </beans>

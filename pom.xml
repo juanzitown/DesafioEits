@@ -147,6 +147,12 @@
 			<version>4.1.1.RELEASE</version>
 		</dependency>
 
+		<!-- Spring ENVERS -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-envers</artifactId>
+			<version>0.2.0.RELEASE</version>
+		</dependency>
 
 		<!-- DWR -->
 		<dependency>
@@ -163,9 +169,24 @@
 			<version>3.0.0-SNAPSHOT</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>3.2.5.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>3.2.5.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>3.2.5.RELEASE</version>
+		</dependency>
 	</dependencies>
 
-	<!--  Repositorios DWR -->
+	<!-- Repositorios DWR -->
 	<repositories>
 		<repository>
 			<!-- Please consider setting up your own on-site repository proxy such 
