@@ -12,6 +12,10 @@ public class MarcaController {
 		return "test";
 	}
 	
+	@RequestMapping(value = "/marcaCadastrar", method = RequestMethod.GET)
+	public String marcaCadastrar() {
+		return "marcaCadastrar";
+	}
 	
 	
 	
