@@ -1,5 +1,7 @@
 package com.desafio.app.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.directwebremoting.annotations.RemoteMethod;
@@ -20,15 +22,18 @@ public class MarcaServiceImpl implements MarcaService{
 
 	@Override
 	@RemoteMethod
-	public Marca saveMarca(String descricao) {
-		Marca marca = new Marca();
-		marca.setDescricao(descricao);
+	public Marca saveMarca(Marca marca) {
 		return marcaRepository.save(marca);
 	}
 
 	@Override
 	public Marca findMarca(Long id) {
 		return marcaRepository.find(id);
+	}
+
+	@Override
+	public List<Marca> findAllMarca() {
+		return marcaRepository.findAllMarca();
 	}
 
 }

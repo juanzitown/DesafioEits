@@ -9,12 +9,12 @@ public class MarcaController {
 	
 	@RequestMapping(value = "/marca", method = RequestMethod.GET)
 	public String marca() {
-		return "test";
+		return "marca";
 	}
 	
-	@RequestMapping(value = "/marcaCadastrar", method = RequestMethod.GET)
-	public String marcaCadastrar() {
-		return "marcaCadastrar";
+	@RequestMapping(value = "/marca/listar", method = RequestMethod.GET)
+	public String marcaListar() {
+		return "marcaListar";
 	}
 	
 	

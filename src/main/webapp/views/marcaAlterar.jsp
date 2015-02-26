@@ -12,11 +12,22 @@
 	</div>
 	<br>
 	<br>
+	
+ <md-select ng-model="marca" placeholder="Descrição da Marca">
+    <md-option ng-value="marca" ng-repeat="marca in marcas">{{ marca.descricao }}</md-option>
+  </md-select>
+	
+<div layout="column" layout-align="center center" style="min-height: 300px;">
+</div>
+
 	<div layout layout-sm="column"  style="width: 50%; ">
 		
+		<label>Id</label>
+        <label>{{cbMarca.id}}</label>
+        
         <md-input-container flex >
         <label>Descrição</label>
-          <input ng-model="marca.descricao" placeholder="Descrição da marca" style="width:50%">
+          <input ng-model="marca.descricao" placeholder="Descrição da Marca" style="width:50%" value="{{cbMarca.descricao}}">
         </md-input-container> 
      </div>
      

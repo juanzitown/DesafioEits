@@ -16,4 +16,6 @@
     </create>
     
   </allow>
+  
+  <convert converter="bean" match="com.desafio.app.model.Marca"/>
 </dwr>

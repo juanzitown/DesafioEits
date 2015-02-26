@@ -1,7 +1,10 @@
 package com.desafio.app.repository;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
@@ -23,6 +26,12 @@ public class MarcaRepositoryImpl implements MarcaRepository {
 	@Override
 	public Marca find(Long id) {
 		return entityManager.find(Marca.class, id);
+	}
+
+	@Override
+	public List<Marca> findAllMarca() {
+		Query query = entityManager.createQuery("SELECT e FROM Marca e");
+		return (List<Marca>) query.getResultList();
 	}
 
 }
