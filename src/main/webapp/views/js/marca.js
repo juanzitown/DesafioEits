@@ -30,42 +30,40 @@ angular.module('marca', ['ngMaterial'])
     }
     
     $scope.changeToInsert = function () {
-    		$scope.marca = {};
-    	
+//    		$scope.marca = {};
     }
     
     $scope.changeToList = function () {
-    	$scope.marcas = {};
+//    	$scope.marcas = {};
     	$scope.findAllMarca();
-    	
     }
     
     $scope.changeToAlter = function () {
-    	
+//    	$scope.comboBoxAlterMarca = {};
     }
+    
     
     $scope.findAllMarca = function(){
     	marcaServiceDwr.findAllMarca({
   		  callback : function(data){
-  			  $scope.marcas = data;
+  			  $scope.marcaController.marcas = data;
   			  $scope.$apply();
   		  },
-  		  errorHandler : function(){
-  				
+  		  errorHandler : function(){	
   		  }
   		 });
     }
     
     $scope.saveMarca = function () {
 		 // Retrieve value of text inputs
-		 var marca = $scope.marca;
+		 var marca = $scope.marcaController.cadastrar.marca;
 		  
 		 // Pass two numbers, a callback function, and error function
 		 marcaServiceDwr.saveMarca(marca, {
 		  callback : function(data){
-			  $scope.resultado = data.descricao + " Salvo com sucesso!";
+			  $scope.marcaController.cadastrar.resultado = data.descricao + " Salvo com sucesso!";
 			  $scope.$apply();
-			  alert($scope.resultado);
+			  alert($scope.marcaController.cadastrar.resultado);
 		  },
 		  errorHandler : function(){
 			// Show a popup message
@@ -76,14 +74,13 @@ angular.module('marca', ['ngMaterial'])
     
     $scope.alterMarca = function () {
 		 // Retrieve value of text inputs
-		 var marca = $scope.marca;
+		 var marca = $scope.marcaController.alterar.comboBoxAlterMarca;
 		  
 		 // Pass two numbers, a callback function, and error function
 		 marcaServiceDwr.alterMarca(marca, {
 		  callback : function(data){
-			  $scope.resultadoAlterar = data.descricao + " Alterado com sucesso!";
-			  $scope.$apply();
-			  alert($scope.resultadoAlterar);
+			  $scope.marcaController.alterar.resultado = data.descricao + " Alterado com sucesso!";
+			  alert($scope.marcaController.alterar.resultado);
 		  },
 		  errorHandler : function(){
 			// Show a popup message

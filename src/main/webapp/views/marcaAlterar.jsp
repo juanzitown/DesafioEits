@@ -13,8 +13,8 @@
 	<br>
 	<br>
 	
- <md-select ng-model="cbMarca" placeholder="Descrição da Marca">
-    <md-option ng-value="marca" ng-repeat="marca in marcas">{{ marca.descricao }}</md-option>
+ <md-select ng-model="marcaController.alterar.comboBoxMarca" placeholder="Descrição da Marca">
+    <md-option ng-value="marca" ng-repeat="marca in marcaController.marcas">{{ marca.descricao }}</md-option>
  </md-select>
 	
 <div layout="column" layout-align="center center" style="min-height: 100px;">
@@ -24,19 +24,19 @@
 		
 		<md-input-container flex >
 	        <label>Id</label>
-	        <label>{{cbMarca.id}}</label>
+	        <label>{{marcaController.alterar.comboBoxMarca.id}}</label>
         </md-input-container> 
     </div>
     <div>
     	<md-input-container flex >
         <label>Descrição</label>
-          <input ng-model="cbMarca.descricao" placeholder="Descrição da Marca" style="width:50%" value="{{cbMarca.descricao}}">
+          <input ng-model="marcaController.alterar.comboBoxMarca.descricao" placeholder="Descrição da Marca" style="width:50%" value="{{marcaController.alterar.comboBoxMarca.descricao}}">
         </md-input-container> 
     </div>
      
      <md-button class="md-raised" ng-click="alterMarca()">Alterar</md-button>
      <br><br><br>
-     <label>{{resultadoAlterar}}</label>
+     <label>{{marcaController.alterar.resultado}}</label>
 </div>
  
 </body>

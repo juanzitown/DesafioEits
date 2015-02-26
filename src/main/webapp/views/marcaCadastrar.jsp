@@ -16,13 +16,13 @@
 		
         <md-input-container flex >
         <label>Descrição</label>
-          <input ng-model="marca.descricao" placeholder="Descrição da marca" style="width:50%">
+          <input ng-model="marcaController.cadastrar.marca.descricao" placeholder="Descrição da marca" style="width:50%">
         </md-input-container> 
      </div>
      
      <md-button class="md-raised" ng-click="saveMarca()">Cadastrar</md-button>
      <br><br><br>
-     <label>{{resultado}}</label>
+     <label>{{marcaController.cadastrar.resultado}}</label>
 </div>
  
 </body>

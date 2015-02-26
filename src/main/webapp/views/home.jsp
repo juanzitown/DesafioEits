@@ -8,10 +8,10 @@
 </head>
 
 
-<body>
+<body ng-app="desafio">
 	<h1>Hello world!</h1>
 
-	<div data-ng-app="" data-ng-controller="personController">
+	<div  data-ng-controller="personController">
 		<p> Teste angularJS >>>>>></p>
 		First Name: <input type="text" data-ng-model="firstName"><br>
 		Last Name: <input type="text" data-ng-model="lastName"><br> <br>
