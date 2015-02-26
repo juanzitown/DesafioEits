@@ -14,8 +14,7 @@ angular.module('marca', ['ngMaterial'])
      ];
     $scope.tabs = tabs;
     $scope.selectedIndex = 0;
-    
-    
+     
     $scope.changeState = function(state) {
     	 $scope.CURRENT_STATE = state;
     	 
@@ -42,7 +41,7 @@ angular.module('marca', ['ngMaterial'])
     }
     
     $scope.changeToAlter = function () {
-    	$scope.marcas = {};
+    	
     }
     
     $scope.findAllMarca = function(){
@@ -74,6 +73,24 @@ angular.module('marca', ['ngMaterial'])
 		  }
 		 });
     }
+    
+    $scope.alterMarca = function () {
+		 // Retrieve value of text inputs
+		 var marca = $scope.marca;
+		  
+		 // Pass two numbers, a callback function, and error function
+		 marcaServiceDwr.alterMarca(marca, {
+		  callback : function(data){
+			  $scope.resultadoAlterar = data.descricao + " Alterado com sucesso!";
+			  $scope.$apply();
+			  alert($scope.resultadoAlterar);
+		  },
+		  errorHandler : function(){
+			// Show a popup message
+				 alert("Não foi possivel cadastrar Marca");
+		  }
+		 });
+   }
 
 //    $scope.$watch('selectedIndex', function(current, old){
 //      if ( old && (old != current)) $log.debug('Goodbye ' + tabs[old].title + '!');

@@ -36,4 +36,9 @@ public class MarcaServiceImpl implements MarcaService{
 		return marcaRepository.findAllMarca();
 	}
 
+	@Override
+	public Marca alterMarca(Marca marca) {
+		return marcaRepository.alterMarca(marca);
+	}
+
 }

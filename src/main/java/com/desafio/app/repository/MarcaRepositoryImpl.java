@@ -34,4 +34,10 @@ public class MarcaRepositoryImpl implements MarcaRepository {
 		return (List<Marca>) query.getResultList();
 	}
 
+	@Override
+	public Marca alterMarca(Marca marca) {
+		entityManager.merge(marca);
+		return marca;
+	}
+
 }

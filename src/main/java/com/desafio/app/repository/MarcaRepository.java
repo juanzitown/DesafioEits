@@ -9,4 +9,5 @@ public interface MarcaRepository {
 	public Marca save(Marca marca);
 	public Marca find(Long id);
 	public List<Marca> findAllMarca();
+	public Marca alterMarca(Marca marca);
 }
