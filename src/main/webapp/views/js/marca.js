@@ -118,6 +118,9 @@ angular.module('moduloMarca', ['ngMaterial'])
 		 $scope.marcaController.initInsert();
     };
     
+    /**
+     * 
+     */
     $scope.marcaController.alterMarca = function () {
 		 // Retrieve value of text inputs
 		 var marca = $scope.marcaController.alterar.comboBoxMarca;
