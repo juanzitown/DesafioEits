@@ -27,16 +27,19 @@ public class MarcaServiceImpl implements MarcaService{
 	}
 
 	@Override
+	@RemoteMethod
 	public Marca findMarca(Long id) {
 		return marcaRepository.find(id);
 	}
 
 	@Override
+	@RemoteMethod
 	public List<Marca> findAllMarca() {
 		return marcaRepository.findAllMarca();
 	}
 
 	@Override
+	@RemoteMethod
 	public Marca alterMarca(Marca marca) {
 		return marcaRepository.alterMarca(marca);
 	}

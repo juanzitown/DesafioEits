@@ -4,20 +4,27 @@
 
 <html>
 <head>
-	<link rel="stylesheet" href="https://rawgit.com/angular/bower-material/5d70169b6147dc15144d3f85a929a9ac3f429584/angular-material.css">
- 	<link rel="stylesheet" href="/app/views/css/marca.css">
-    
+	<!-- Angular Material CSS -->
+	<link rel="stylesheet" href="/app/views/angularMaterial/angular_bower_material.css">
+
+    <!-- DWR -->
    	<script type='text/javascript' src="/app/dwr/engine.js"></script>
    	<script type='text/javascript' src="/app/dwr/util.js"></script>
    	<script type="text/javascript" src="/app/dwr/interface/marcaServiceDwr.js"></script>
    
-   	<!-- Angular Material Dependencies -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular-animate.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular-aria.js"></script>
-    <script src="https://rawgit.com/angular/bower-material/5d70169b6147dc15144d3f85a929a9ac3f429584/angular-material.js"></script>
-	<script src="/app/views/js/message.js"></script>
+   	<!-- Angular JS -->
+    <script src="/app/views/angularjs/angular.js"></script>
+    <script src="/app/views/angularjs/angular-aria.js"></script>
+    <script src="/app/views/angularjs/angular-animate.js"></script>
+    <script src="/app/views/js/angular-message.js"></script>
+    
+    <!-- Angular Material JS-->
+    <script src="/app/views/angularMaterial/angular_bower_material.js"></script>
 	
+	<!-- APP CSS-->
+	<link rel="stylesheet" href="/app/views/css/marca.css">
+	
+	<!-- APP JS -->
 	<script src="/app/views/js/marca.js"></script>
 	
 </head>

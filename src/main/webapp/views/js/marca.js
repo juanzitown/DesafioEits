@@ -1,6 +1,8 @@
 angular.module('marca', ['ngMaterial'])
   .controller('marcaController', function ($scope, $log) {
 	  
+	  $scope.marcaController = {};
+	  
 	  $scope.INSERT_STATE = "INSERT";
 	  $scope.LIST_STATE = "LIST";
 	  $scope.ALTER_STATE = "ALTER";
@@ -30,16 +32,18 @@ angular.module('marca', ['ngMaterial'])
     }
     
     $scope.changeToInsert = function () {
-//    		$scope.marca = {};
+    	$scope.marcaController.cadastrar = {};
+    	$scope.marcaController.cadastrar.marca = {};
     }
     
     $scope.changeToList = function () {
-//    	$scope.marcas = {};
+    	$scope.marcaController.marcas = {};
     	$scope.findAllMarca();
     }
     
     $scope.changeToAlter = function () {
-//    	$scope.comboBoxAlterMarca = {};
+    	$scope.marcaController.alterar = {};
+    	$scope.marcaController.alterar.comboBoxMarca = {};
     }
     
     
@@ -47,7 +51,6 @@ angular.module('marca', ['ngMaterial'])
     	marcaServiceDwr.findAllMarca({
   		  callback : function(data){
   			  $scope.marcaController.marcas = data;
-  			  $scope.$apply();
   		  },
   		  errorHandler : function(){	
   		  }
@@ -74,7 +77,7 @@ angular.module('marca', ['ngMaterial'])
     
     $scope.alterMarca = function () {
 		 // Retrieve value of text inputs
-		 var marca = $scope.marcaController.alterar.comboBoxAlterMarca;
+		 var marca = $scope.marcaController.alterar.comboBoxMarca;
 		  
 		 // Pass two numbers, a callback function, and error function
 		 marcaServiceDwr.alterMarca(marca, {
@@ -88,11 +91,4 @@ angular.module('marca', ['ngMaterial'])
 		  }
 		 });
    }
-
-//    $scope.$watch('selectedIndex', function(current, old){
-//      if ( old && (old != current)) $log.debug('Goodbye ' + tabs[old].title + '!');
-//      if ( current )                $log.debug('Hello ' + tabs[current].title + '!');
-//    });
-    
-    
   });
