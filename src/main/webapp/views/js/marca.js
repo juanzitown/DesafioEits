@@ -33,7 +33,6 @@ angular.module('moduloMarca', ['ngMaterial'])
 	    
 	    $scope.marcaController.initList = function () {
 	    	$scope.marcaController.marcas = {};
-//	    	$scope.findAllMarca();
 	    };
 	    
 	    $scope.marcaController.initAlter = function () {
@@ -42,8 +41,7 @@ angular.module('moduloMarca', ['ngMaterial'])
 	    };
 	    
 	    $scope.marcaController.initDelete = function () {
-//	    	$scope.marcaController.alterar = {};
-//	    	$scope.marcaController.alterar.comboBoxMarca = {};
+
 	    };
       
 	    $scope.marcaController.initAlter();
@@ -54,8 +52,7 @@ angular.module('moduloMarca', ['ngMaterial'])
     	
     	
     	$scope.marcaController.changeToInsert = function () {
-//	    	$scope.marcaController.cadastrar = {};
-//	    	$scope.marcaController.cadastrar.marca = {};
+    		$scope.marcaController.initInsert();
 	    };
 	    
 	    $scope.marcaController.changeToList = function () {
@@ -65,13 +62,11 @@ angular.module('moduloMarca', ['ngMaterial'])
 	    };
 	    
 	    $scope.marcaController.changeToAlter = function () {
-//	    	$scope.marcaController.alterar = {};
-//	    	$scope.marcaController.alterar.comboBoxMarca = {};
+	    	$scope.marcaController.initAlter();
 	    };
 	    
 	    $scope.marcaController.changeToDelete = function () {
-//	    	$scope.marcaController.alterar = {};
-//	    	$scope.marcaController.alterar.comboBoxMarca = {};
+
 	    };
       
 	    $scope.marcaController.changeToAlter();
@@ -83,13 +78,13 @@ angular.module('moduloMarca', ['ngMaterial'])
     
     $scope.marcaController.onClickTab = function(index) {
     	if(index == $scope.CADASTRAR) {
-    		
+    		$scope.marcaController.changeToInsert();
     	} else if (index == $scope.LISTAR) {
     		$scope.marcaController.changeToList();
     	} else if (index == $scope.ALTERAR) {
-    		
+    		$scope.marcaController.changeToAlter();
     	} else if (index == $scope.DELETAR) {
-    		
+    		$scope.marcaController.changeToDelete();
     	}
     };
       
@@ -119,6 +114,8 @@ angular.module('moduloMarca', ['ngMaterial'])
 				 alert("Não foi possivel cadastrar Marca");
 		  }
 		 });
+		 
+		 $scope.marcaController.initInsert();
     };
     
     $scope.marcaController.alterMarca = function () {
@@ -136,5 +133,7 @@ angular.module('moduloMarca', ['ngMaterial'])
 				 alert("Não foi possivel cadastrar Marca");
 		  }
 		 });
+		 
+		 $scope.marcaController.initAlter();	 
    };
   });
