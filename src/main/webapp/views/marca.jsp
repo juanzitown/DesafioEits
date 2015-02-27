@@ -5,7 +5,10 @@
 <html>
 <head>
 	<!-- Angular Material CSS -->
-	<link rel="stylesheet" href="/app/views/angularMaterial/angular_bower_material.css">
+	<link rel="stylesheet" href="/app/views/angular-material/angular-material.css">
+	
+	<!-- APP CSS-->
+	<link rel="stylesheet" href="/app/views/css/marca.css">
 
     <!-- DWR -->
    	<script type='text/javascript' src="/app/dwr/engine.js"></script>
@@ -13,81 +16,33 @@
    	<script type="text/javascript" src="/app/dwr/interface/marcaServiceDwr.js"></script>
    
    	<!-- Angular JS -->
-    <script src="/app/views/angularjs/angular.js"></script>
-    <script src="/app/views/angularjs/angular-aria.js"></script>
-    <script src="/app/views/angularjs/angular-animate.js"></script>
-    <script src="/app/views/angularjs/angular-message.js"></script>
+    <script src="/app/views/angular/angular.js"></script>
+    <script src="/app/views/angular/angular-message.js"></script>
+    <script src="/app/views/angular-aria/angular-aria.js"></script>
+    <script src="/app/views/angular-animate/angular-animate.js"></script>
+    
     
     <!-- Angular Material JS-->
-    <script src="/app/views/angularMaterial/angular_bower_material.js"></script>
-	
-	<!-- APP CSS-->
-	<link rel="stylesheet" href="/app/views/css/marca.css">
+    <script src="/app/views/angular-material/angular-material.js"></script>
 	
 	<!-- APP JS -->
 	<script src="/app/views/js/marca.js"></script>
 	
 </head>
- <body ng-app="marca">
-	<div ng-controller="marcaController" class="sample" layout="column">
+ <body ng-app="moduloMarca">
+ 
+	<div ng-controller="marcaController" layout="column" ng-init="marcaController.init()">
 	    
-	  <md-tabs md-selected="selectedIndex" flex>
-	    <md-tab ng-repeat="tab in tabs" ng-disabled="tab.disabled" label="{{tab.title}}">
-	    <div ng-if="tab.id == 1" ng-init="changeState(INSERT_STATE)" ng-include="'/app/views/marcaCadastrar.jsp'"></div>
-	    <div ng-if="tab.id == 2" ng-init="changeState(LIST_STATE)" ng-include="'/app/views/marcaListar.jsp'"></div>
-	    <div ng-if="tab.id == 3" ng-init="changeState(ALTER_STATE)" ng-include="'/app/views/marcaAlterar.jsp'"></div>
+	  <md-tabs md-selected="marcaController.selectedTabIndex" flex>
+	    <md-tab md-on-select="marcaController.onClickTab($index)" ng-repeat="tab in marcaController.tabs " ng-disabled="tab.disabled" label="{{tab.title}}">
 	    
-	    <div class="demo-tab tab{{$index%4}}" layout="column" layout-align="space-around center">
-	    
-	        <div ng-bind="tab.content" >
-	     
-	        </div>
+		    <div ng-click="onClickTab()" ng-if="tab.id == 1" ng-include="'/app/views/marcaCadastrar.jsp'"></div>
+		    <div ng-click="marcaController.onClickTab()" ng-if="tab.id == 2" ng-include="'/app/views/marcaListar.jsp'"></div>
+		    <div ng-click="marcaController.onClickTab()" ng-if="tab.id == 3" ng-include="'/app/views/marcaAlterar.jsp'"></div>
 	        
-	    </div>
-	    </md-tab>
+	   	</md-tab>
 	  </md-tabs>
 	</div>
 	
-	<div>
-  <md-grid-list
-        md-cols-sm="1" md-cols-md="2" md-cols-gt-md="6"
-        md-row-height-gt-md="1:1" md-row-height="2:2"
-        md-gutter="12x" md-gutter-gt-sm="8px" >
-    <md-grid-tile class="gray"
-        md-rowspan="3" md-colspan="2">
-      <md-grid-tile-footer>
-        <h3>#1: (3r x 2c)</h3>
-      </md-grid-tile-footer>
-    </md-grid-tile>
-    <md-grid-tile class="green">
-      <md-grid-tile-footer>
-        <h3>#2: (1r x 1c)</h3>
-      </md-grid-tile-footer>
-    </md-grid-tile>
-    <md-grid-tile class="yellow">
-      <md-grid-tile-footer>
-        <h3>#3: (1r x 1c)</h3>
-      </md-grid-tile-footer>
-    </md-grid-tile>
-    <md-grid-tile class="blue"
-        md-rowspan="2">
-      <md-grid-tile-footer>
-        <h3>#4: (2r x 1c)</h3>
-      </md-grid-tile-footer>
-    </md-grid-tile>
-    <md-grid-tile class="red"
-        md-rowspan="2" md-colspan="2">
-      <md-grid-tile-footer>
-        <h3>#5: (2r x 2c)</h3>
-      </md-grid-tile-footer>
-    </md-grid-tile>
-    <md-grid-tile class="green"
-        md-rowspan="2" >
-      <md-grid-tile-footer>
-        <h3>#6: (2r x 1c)</h3>
-      </md-grid-tile-footer>
-    </md-grid-tile>
-  </md-grid-list>
-</div>
 </body>
 </html>

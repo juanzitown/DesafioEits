@@ -20,7 +20,7 @@
         </md-input-container> 
      </div>
      
-     <md-button class="md-raised" ng-click="saveMarca()">Cadastrar</md-button>
+     <md-button class="md-raised" ng-click="marcaController.saveMarca()">Cadastrar</md-button>
      <br><br><br>
      <label>{{marcaController.cadastrar.resultado}}</label>
 </div>

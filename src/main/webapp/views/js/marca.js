@@ -1,63 +1,110 @@
-angular.module('marca', ['ngMaterial'])
+angular.module('moduloMarca', ['ngMaterial'])
   .controller('marcaController', function ($scope, $log) {
 	  
-	  $scope.marcaController = {};
+	$scope.marcaController = {};
 	  
-	  $scope.INSERT_STATE = "INSERT";
-	  $scope.LIST_STATE = "LIST";
-	  $scope.ALTER_STATE = "ALTER";
-	  $scope.CURRENT_STATE = "";
-	  
-    var tabs = [
-      { title: 'Cadastrar', content: "CADASTRAR MARCA", id:1},
-      { title: 'Listar', content: "LISTAR MARCA", id:2},
-      { title: 'Alterar', content: "ALTERAR MARCA", id:3},
-      { title: 'Deletar', content: "DELETAR MARCA"}
-     ];
-    $scope.tabs = tabs;
-    $scope.selectedIndex = 0;
-     
-    $scope.changeState = function(state) {
-    	 $scope.CURRENT_STATE = state;
-    	 
-    	 if(state == $scope.INSERT_STATE){
-    		 $scope.changeToInsert();
-    	 }
-    	 else if(state == $scope.LIST_STATE){
-    		 $scope.changeToList();
-    	 }
-    	 else if(state == $scope.ALTER_STATE){
-    		 $scope.changeToAlter();
-    	 }
-    }
+    $scope.marcaController.init = function() {
+    	$scope.CADASTRAR = 0;
+    	$scope.LISTAR = 1;
+    	$scope.ALTERAR = 2;
+    	$scope.DELETAR = 3;
+    	
+    	$scope.marcaController.INSERT_STATE = "INSERT";
+  	  	$scope.marcaController.LIST_STATE = "LIST";
+  	  	$scope.marcaController.ALTER_STATE = "ALTER";
+  	  	$scope.marcaController.DELETE_STATE = "DELETE";
+  	  	$scope.marcaController.CURRENT_STATE = "";
+  	  
+  	  	var tabs = [
+	        { title: 'Cadastrar', content: "CADASTRAR MARCA", id:1},
+	        { title: 'Listar', content: "LISTAR MARCA", id:2},
+	        { title: 'Alterar', content: "ALTERAR MARCA", id:3},
+	        { title: 'Deletar', content: "DELETAR MARCA"}
+        ];
+      
+	    $scope.marcaController.tabs = tabs;
+	    $scope.marcaController.selectedTabIndex = 0;
+	    
+	    
+	    $scope.marcaController.initInsert = function () {
+	    	$scope.marcaController.cadastrar = {};
+	    	$scope.marcaController.cadastrar.marca = {};
+	    };
+	    
+	    $scope.marcaController.initList = function () {
+	    	$scope.marcaController.marcas = {};
+//	    	$scope.findAllMarca();
+	    };
+	    
+	    $scope.marcaController.initAlter = function () {
+	    	$scope.marcaController.alterar = {};
+	    	$scope.marcaController.alterar.comboBoxMarca = {};
+	    };
+	    
+	    $scope.marcaController.initDelete = function () {
+//	    	$scope.marcaController.alterar = {};
+//	    	$scope.marcaController.alterar.comboBoxMarca = {};
+	    };
+      
+	    $scope.marcaController.initAlter();
+    	$scope.marcaController.initDelete();
+    	$scope.marcaController.initInsert();
+    	$scope.marcaController.initList();
+    	
+    	
+    	
+    	$scope.marcaController.changeToInsert = function () {
+//	    	$scope.marcaController.cadastrar = {};
+//	    	$scope.marcaController.cadastrar.marca = {};
+	    };
+	    
+	    $scope.marcaController.changeToList = function () {
+	    	$scope.marcaController.marcas = {};
+	    	$scope.marcaController.findAllMarca();
+	    	
+	    };
+	    
+	    $scope.marcaController.changeToAlter = function () {
+//	    	$scope.marcaController.alterar = {};
+//	    	$scope.marcaController.alterar.comboBoxMarca = {};
+	    };
+	    
+	    $scope.marcaController.changeToDelete = function () {
+//	    	$scope.marcaController.alterar = {};
+//	    	$scope.marcaController.alterar.comboBoxMarca = {};
+	    };
+      
+	    $scope.marcaController.changeToAlter();
+    	$scope.marcaController.changeToDelete();
+    	$scope.marcaController.changeToInsert();
+    	$scope.marcaController.changeToList();
+
+    };
     
-    $scope.changeToInsert = function () {
-    	$scope.marcaController.cadastrar = {};
-    	$scope.marcaController.cadastrar.marca = {};
-    }
-    
-    $scope.changeToList = function () {
-    	$scope.marcaController.marcas = {};
-    	$scope.findAllMarca();
-    }
-    
-    $scope.changeToAlter = function () {
-    	$scope.marcaController.alterar = {};
-    	$scope.marcaController.alterar.comboBoxMarca = {};
-    }
-    
-    
-    $scope.findAllMarca = function(){
+    $scope.marcaController.onClickTab = function(index) {
+    	if(index == $scope.CADASTRAR) {
+    		
+    	} else if (index == $scope.LISTAR) {
+    		$scope.marcaController.changeToList();
+    	} else if (index == $scope.ALTERAR) {
+    		
+    	} else if (index == $scope.DELETAR) {
+    		
+    	}
+    };
+      
+    $scope.marcaController.findAllMarca = function(){
     	marcaServiceDwr.findAllMarca({
   		  callback : function(data){
   			  $scope.marcaController.marcas = data;
+  			  $scope.$apply();
   		  },
   		  errorHandler : function(){	
   		  }
   		 });
-    }
+    };
     
-    $scope.saveMarca = function () {
+    $scope.marcaController.saveMarca = function () {
 		 // Retrieve value of text inputs
 		 var marca = $scope.marcaController.cadastrar.marca;
 		  
@@ -65,7 +112,6 @@ angular.module('marca', ['ngMaterial'])
 		 marcaServiceDwr.saveMarca(marca, {
 		  callback : function(data){
 			  $scope.marcaController.cadastrar.resultado = data.descricao + " Salvo com sucesso!";
-			  $scope.$apply();
 			  alert($scope.marcaController.cadastrar.resultado);
 		  },
 		  errorHandler : function(){
@@ -73,9 +119,9 @@ angular.module('marca', ['ngMaterial'])
 				 alert("Não foi possivel cadastrar Marca");
 		  }
 		 });
-    }
+    };
     
-    $scope.alterMarca = function () {
+    $scope.marcaController.alterMarca = function () {
 		 // Retrieve value of text inputs
 		 var marca = $scope.marcaController.alterar.comboBoxMarca;
 		  
@@ -90,5 +136,5 @@ angular.module('marca', ['ngMaterial'])
 				 alert("Não foi possivel cadastrar Marca");
 		  }
 		 });
-   }
+   };
   });

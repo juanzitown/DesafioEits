@@ -34,7 +34,7 @@
         </md-input-container> 
     </div>
      
-     <md-button class="md-raised" ng-click="alterMarca()">Alterar</md-button>
+     <md-button class="md-raised" ng-click="marcaController.alterMarca()">Alterar</md-button>
      <br><br><br>
      <label>{{marcaController.alterar.resultado}}</label>
 </div>
