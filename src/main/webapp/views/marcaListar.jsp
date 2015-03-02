@@ -22,11 +22,11 @@
 		  <label>{{marca.id}}</label>
 		  <label>{{marca.descricao}}</label>
 		  
-		  <md-button ng-click="teste()" class="md-raised md-primary">
+		  <md-button ng-click="marcaController.alterarModal($event, marca)" class="md-raised md-primary">
 		  	<md-icon md-svg-src='{{iconAlterar}}' alt="Alterar marca"></md-icon>
 		  </md-button>
 		  
-		  <md-button ng-click="teste()" class="md-raised md-primary">
+		  <md-button ng-click="marcaController.deletarModal($event, marca)" class="md-raised md-primary">
 		  	<md-icon md-svg-src='{{iconDeletar}}' alt="Deletar marca"></md-icon>
 		  </md-button>
 		</div>

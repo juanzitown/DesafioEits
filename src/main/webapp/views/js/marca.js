@@ -1,11 +1,18 @@
 angular.module('moduloMarca', ['ngMaterial'])
-  .controller('marcaController', function ($scope, $log) {
+  .controller('marcaController', function ($scope, $mdDialog) {
 	  
 	$scope.marcaController = {};
 	  
     $scope.marcaController.init = function() {
+    	
+    	$scope.scopeModal = {};
+    	$scope.scopeModal.marca = {};
+    	
     	$scope.iconAlterar = "/app/resources/icons/cake.svg";
     	$scope.iconDeletar = "/app/resources/icons/android.svg";
+    	$scope.templateAlterarModal = "/app/views/marcaAlterarTest.jsp";
+    	$scope.templateDeletarModal = "/app/views/marcaDeletar.jsp";
+    	
     	$scope.CADASTRAR = 0;
     	$scope.LISTAR = 1;
     	$scope.ALTERAR = 2;
@@ -101,9 +108,47 @@ angular.module('moduloMarca', ['ngMaterial'])
   		 });
     };
     
-    $scope.marcaController.teste = function() {
-    	console.log();
+    $scope.marcaController.alterarModal = function(ev, marca) {
+    	$scope.marcaController.showAdvanced(ev, marca, $scope.templateAlterarModal);
     }
+    
+    $scope.marcaController.deletarModal = function() {
+    	
+    	$scope.marcaController.showAdvanced(ev, marca, $scope.templateDeletarModal);
+    }
+    
+    $scope.marcaController.showAdvanced = function(ev, marca, template) {
+        $mdDialog.show({
+          controller: DialogController,
+          templateUrl: template,
+          targetEvent: ev,
+          locals: {
+        	  marca: marca
+          }
+        })
+        .then(function(marcaAlterada) {
+        	if(marcaAlterada != marca) {
+        		$scope.marcaController.alterMarca(marcaAlterada);
+        		$scope.marcaController.changeToList();
+        	}
+         	
+        }, function() {
+//        	alert('Modal Cancelada pelo usuario.');
+        });
+      };
+      
+      function DialogController($scope, $mdDialog, marca) {
+    	  $scope.marca = angular.copy(marca);
+    	  $scope.hide = function() {
+    	    $mdDialog.hide();
+    	  };
+    	  $scope.cancel = function() {
+    	    $mdDialog.cancel();
+    	  };
+    	  $scope.answer = function(answer) {
+    	    $mdDialog.hide(answer);
+    	  };
+    	}
     
     $scope.marcaController.saveMarca = function () {
 		 // Retrieve value of text inputs
@@ -127,9 +172,7 @@ angular.module('moduloMarca', ['ngMaterial'])
     /**
      * 
      */
-    $scope.marcaController.alterMarca = function () {
-		 // Retrieve value of text inputs
-		 var marca = $scope.marcaController.alterar.comboBoxMarca;
+    $scope.marcaController.alterMarca = function (marca) {
 		  
 		 // Pass two numbers, a callback function, and error function
 		 marcaServiceDwr.alterMarca(marca, {
