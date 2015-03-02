@@ -4,6 +4,8 @@ angular.module('moduloMarca', ['ngMaterial'])
 	$scope.marcaController = {};
 	  
     $scope.marcaController.init = function() {
+    	$scope.iconAlterar = "/app/resources/icons/cake.svg";
+    	$scope.iconDeletar = "/app/resources/icons/android.svg";
     	$scope.CADASTRAR = 0;
     	$scope.LISTAR = 1;
     	$scope.ALTERAR = 2;
@@ -98,6 +100,10 @@ angular.module('moduloMarca', ['ngMaterial'])
   		  }
   		 });
     };
+    
+    $scope.marcaController.teste = function() {
+    	console.log();
+    }
     
     $scope.marcaController.saveMarca = function () {
 		 // Retrieve value of text inputs
