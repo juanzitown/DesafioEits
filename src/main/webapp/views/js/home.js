@@ -1,4 +1,27 @@
-angular.module('desafio', ['ngMaterial'])
+angular.module('desafio', ['ngMaterial', 'ngRoute'])
+	.config(['$routeProvider',
+		  function($routeProvider) {
+			    $routeProvider.
+			      when('/marca', {
+				    templateUrl: '/app/views/marca.jsp',
+				    controller: 'marcaController'
+			      })
+			      .when('/marca/cadastrar', {
+				    templateUrl: '/app/views/marcaCadastrar.jsp',
+				    controller: 'marcaController',
+				    selectedTabIndex: 0
+			      })
+			      .when('/marca/listar', {
+				    templateUrl: '/app/views/marcaListar.jsp',
+				    controller: 'marcaController',
+				    selectedTabIndex: 1
+			      })
+			      .otherwise({
+			    	  redirectTo: "/"
+			      })
+ 		}])
+ 		
+ 		
   .controller('homeController', function ($scope, $mdDialog) {
 	  
 	$scope.homeController = {};
@@ -75,7 +98,7 @@ angular.module('desafio', ['ngMaterial'])
      *  MARCA
      */
   
-  .controller('marcaController', function ($scope, $mdDialog) {
+  .controller('marcaController', function ($scope, $mdDialog, $route) {
 	  
 	$scope.marcaController = {};
 	  
@@ -108,8 +131,19 @@ angular.module('desafio', ['ngMaterial'])
         ];
       
 	    $scope.marcaController.tabs = tabs;
-	    $scope.marcaController.selectedTabIndex = 0;
 	    
+	    if($route.current.selectedTabIndex == 0) {
+	    	$scope.marcaController.selectedTabIndex = 0;
+	    	$scope.marcaController.initInsert();
+	    }
+	    	
+	    else if($route.current.selectedTabIndex == 1) {
+	    	$scope.marcaController.selectedTabIndex = 1;
+	    	$scope.marcaController.initList();
+	    }
+	    	
+	    else if($route.current.selectedTabIndex == 2)
+	    	$scope.marcaController.selectedTabIndex = 2;
 	    
 	    $scope.marcaController.initInsert = function () {
 	    	$scope.marcaController.cadastrar = {};
@@ -131,9 +165,6 @@ angular.module('desafio', ['ngMaterial'])
       
 	    $scope.marcaController.initAlter();
     	$scope.marcaController.initDelete();
-    	$scope.marcaController.initInsert();
-    	$scope.marcaController.initList();
-    	
     	
     	
     	$scope.marcaController.changeToInsert = function () {

@@ -14,6 +14,7 @@
 
    	<!-- Angular JS -->
     <script src="/app/views/angular/angular.js"></script>
+    <script src="/app/views/angular/angular-route.js"></script>
     <script src="/app/views/angular/angular-message.js"></script>
     <script src="/app/views/angular-aria/angular-aria.js"></script>
     <script src="/app/views/angular-animate/angular-animate.js"></script>
@@ -40,17 +41,22 @@
         <span>HOME</span>
       </h2>
     </md-toolbar>
+    
+     <ng-view></ng-view>
 
 	<div  ng-controller="homeController" layout="column" ng-init="homeController.init()">
 	    
 	  <md-tabs md-selected="homeController.selectedTabIndex" flex>
-	    <md-tab md-on-select="homeController.onClickTab($index)" ng-repeat="tab in homeController.tabs " ng-disabled="tab.disabled" label="{{tab.title}}">
 	    
-		    <div ng-if="tab.id == 0" ng-include="'/app/views/produto.jsp'"></div>
-		    <div ng-if="tab.id == 1" ng-include="'/app/views/marca.jsp'"></div>
-		    <div ng-if="tab.id == 2" ng-include="'/app/views/loginForm.jsp'"></div>
-	        
-	   	</md-tab>
+		    <md-tab md-on-select="homeController.onClickTab($index)" ng-repeat="tab in homeController.tabs " ng-disabled="tab.disabled" label="{{tab.title}}">
+		    		
+<!-- 		    		<a ng-href="#/marca">view</a> -->
+	<!-- 		    <div ng-if="tab.id == 0" ng-include="'/app/views/produto.jsp'"></div> -->
+	<!-- 		    <div ng-if="tab.id == 1" ng-include="'/app/views/marca.jsp'"></div> -->
+	<!-- 		    <div ng-if="tab.id == 2" ng-include="'/app/views/loginForm.jsp'"></div> -->
+		        
+		   	</md-tab>
+	   	
 	  </md-tabs>
 	</div>
 </body>
