@@ -2,23 +2,56 @@
 <%@ page session="false"%>
 <html>
 <head>
-<title>Hello AngularJS</title>
-	<script	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
-	<script	src="views/js/hello.js"></script>
+
+<title>HOME DESAFIO</title>
+	<!-- Angular Material CSS -->
+	<link rel="stylesheet" href="/app/views/angular-material/angular-material.css">
+	
+	<!-- APP CSS-->
+	<link rel="stylesheet" href="/app/views/css/home.css">
+	<link rel="stylesheet" href="/app/views/css/marca.css">
+	
+
+   	<!-- Angular JS -->
+    <script src="/app/views/angular/angular.js"></script>
+    <script src="/app/views/angular/angular-message.js"></script>
+    <script src="/app/views/angular-aria/angular-aria.js"></script>
+    <script src="/app/views/angular-animate/angular-animate.js"></script>
+    
+    <!-- Angular Material JS-->
+    <script src="/app/views/angular-material/angular-material.js"></script>
+    
+    <!-- DWR -->
+   	<script type='text/javascript' src="/app/dwr/engine.js"></script>
+   	<script type='text/javascript' src="/app/dwr/util.js"></script>
+   	<script type="text/javascript" src="/app/dwr/interface/marcaServiceDwr.js"></script>
+   	
+	
+	<!-- APP JS -->
+	<script src="/app/views/js/home.js"></script>
+	
 </head>
 
 
 <body ng-app="desafio">
-	<h1>Hello world!</h1>
 
-	<div  data-ng-controller="personController">
-		<p> Teste angularJS >>>>>></p>
-		First Name: <input type="text" data-ng-model="firstName"><br>
-		Last Name: <input type="text" data-ng-model="lastName"><br> <br>
-		Full Name: {{firstName + " " + lastName}}
+	<md-toolbar>
+      <h2 class="md-toolbar-tools">
+        <span>HOME</span>
+      </h2>
+    </md-toolbar>
 
+	<div  ng-controller="homeController" layout="column" ng-init="homeController.init()">
+	    
+	  <md-tabs md-selected="homeController.selectedTabIndex" flex>
+	    <md-tab md-on-select="homeController.onClickTab($index)" ng-repeat="tab in homeController.tabs " ng-disabled="tab.disabled" label="{{tab.title}}">
+	    
+		    <div ng-if="tab.id == 0" ng-include="'/app/views/produto.jsp'"></div>
+		    <div ng-if="tab.id == 1" ng-include="'/app/views/marca.jsp'"></div>
+		    <div ng-if="tab.id == 2" ng-include="'/app/views/loginForm.jsp'"></div>
+	        
+	   	</md-tab>
+	  </md-tabs>
 	</div>
-
-	<P>The time on the server is ${serverTime}.</P>
 </body>
 </html>

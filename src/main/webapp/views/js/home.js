@@ -1,4 +1,80 @@
-angular.module('moduloMarca', ['ngMaterial'])
+angular.module('desafio', ['ngMaterial'])
+  .controller('homeController', function ($scope, $mdDialog) {
+	  
+	$scope.homeController = {};
+	  
+    $scope.homeController.init = function() {
+    	$scope.PRODUTO = 0;
+    	$scope.MARCA = 1;
+    	$scope.LOGAR = 2;
+  	  
+  	  	var tabs = [
+	        { title: 'PRODUTO', content: "MODULO PRODUTO", id:0},
+	        { title: 'MARCA', content: "MODULO MARCA", id:1},
+	        { title: 'LOGAR', content: "MODULO LOGAR", id:2}
+        ];
+      
+	    $scope.homeController.tabs = tabs;
+	    $scope.homeController.selectedTabIndex = 0;
+	    
+	    
+	    $scope.homeController.initProduto = function () {
+//	    	$scope.marcaController.cadastrar = {};
+//	    	$scope.marcaController.cadastrar.marca = {};
+	    };
+	    
+	    $scope.homeController.initMarca = function () {
+//	    	$scope.marcaController.marcas = {};
+	    };
+	    
+	    $scope.homeController.initLogar = function () {
+//	    	$scope.marcaController.alterar = {};
+//	    	$scope.marcaController.alterar.comboBoxMarca = {};
+	    };
+      
+	    $scope.homeController.initProduto();
+    	$scope.homeController.initMarca();
+    	$scope.homeController.initLogar();
+    	
+    	$scope.homeController.changeToMarca = function () {
+    		$scope.homeController.initMarca();
+	    };
+	    
+	    $scope.homeController.changeToProduto = function () {
+	    	$scope.homeController.initProduto();
+	    	
+	    };
+	    
+	    $scope.homeController.changeToLogar = function () {
+	    	$scope.homeController.initLogar();
+	    };
+	    
+      
+	    $scope.homeController.changeToMarca();
+    	$scope.homeController.changeToProduto();
+    	$scope.homeController.changeToLogar();
+//    	$scope.marcaController.changeToList();
+
+    };
+    
+    $scope.homeController.onClickTab = function(index) {
+    	if(index == $scope.PRODUTO) {
+    		$scope.homeController.changeToProduto();
+    	} else if (index == $scope.MARCA) {
+    		$scope.homeController.changeToMarca();
+    	} else if (index == $scope.LOGAR) {
+    		$scope.homeController.changeToLogar();
+    	}
+    };
+    
+    
+
+  })
+  
+  /**
+     *  MARCA
+     */
+  
   .controller('marcaController', function ($scope, $mdDialog) {
 	  
 	$scope.marcaController = {};
@@ -188,4 +264,4 @@ angular.module('moduloMarca', ['ngMaterial'])
 		 
 		 $scope.marcaController.initAlter();	 
    };
-  });
+  })
