@@ -16,21 +16,42 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
 				    controller: 'marcaController',
 				    selectedTabIndex: 1
 			      })
+			      .when('/login', {
+			    	  templateUrl: '/app/views/loginForm.jsp',
+			    	  controller: 'marcaController',
+			      })
 			      .otherwise({
 			    	  redirectTo: "/"
 			      })
  		}])
  		
+ .run( function($rootScope, $location) {
+	 
+    // register listener to watch route changes
+    $rootScope.$on( "$routeChangeStart", function(event, next, current) {
+      if ( $rootScope.loggedUser == null ) {
+        // no logged user, we should be going to #login
+        if ( next.templateUrl != "/loginForm.jsp" ) {
+          // already going to #login, no redirect needed
+        	 // not going to #login, we should redirect now
+            $location.path( "/login" );
+        }
+      }         
+    })
+ })
  		
-  .controller('homeController', function ($scope, $mdDialog) {
+ 		
+  .controller('homeController', function ($scope, $mdDialog, $location) {
 	  
 	$scope.homeController = {};
 	  
     $scope.homeController.init = function() {
+    	$scope.LOGOUT = -2;
+    	$scope.HOME = -1;
     	$scope.PRODUTO = 0;
     	$scope.MARCA = 1;
     	$scope.LOGAR = 2;
-  	  
+
   	  	var tabs = [
 	        { title: 'PRODUTO', content: "MODULO PRODUTO", id:0},
 	        { title: 'MARCA', content: "MODULO MARCA", id:1},
@@ -38,7 +59,7 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
         ];
       
 	    $scope.homeController.tabs = tabs;
-	    $scope.homeController.selectedTabIndex = 0;
+	    $scope.homeController.selectedTabIndex = -1;
 	    
 	    
 	    $scope.homeController.initProduto = function () {
@@ -70,8 +91,7 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
 	    
 	    $scope.homeController.changeToLogar = function () {
 	    	$scope.homeController.initLogar();
-	    };
-	    
+	    };    
       
 	    $scope.homeController.changeToMarca();
     	$scope.homeController.changeToProduto();
@@ -83,10 +103,17 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
     $scope.homeController.onClickTab = function(index) {
     	if(index == $scope.PRODUTO) {
     		$scope.homeController.changeToProduto();
+    		$location.path("/produto");
     	} else if (index == $scope.MARCA) {
     		$scope.homeController.changeToMarca();
+    		$location.path("/marca");
     	} else if (index == $scope.LOGAR) {
     		$scope.homeController.changeToLogar();
+    		$location.path("/login");
+    	} else if (index == $scope.LOGOUT) {
+    		$location.path("/logout")
+    	}  else if (index == $scope.HOME) {
+    		$location.path("/")
     	}
     };
     

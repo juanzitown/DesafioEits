@@ -11,7 +11,6 @@
 	<link rel="stylesheet" href="/app/views/css/home.css">
 	<link rel="stylesheet" href="/app/views/css/marca.css">
 	
-
    	<!-- Angular JS -->
     <script src="/app/views/angular/angular.js"></script>
     <script src="/app/views/angular/angular-route.js"></script>
@@ -36,28 +35,34 @@
 
 <body ng-app="desafio">
 
-	<md-toolbar>
-      <h2 class="md-toolbar-tools">
-        <span>HOME</span>
-      </h2>
-    </md-toolbar>
-    
-     <ng-view></ng-view>
-
 	<div  ng-controller="homeController" layout="column" ng-init="homeController.init()">
 	    
-	  <md-tabs md-selected="homeController.selectedTabIndex" flex>
-	    
-		    <md-tab md-on-select="homeController.onClickTab($index)" ng-repeat="tab in homeController.tabs " ng-disabled="tab.disabled" label="{{tab.title}}">
-		    		
-<!-- 		    		<a ng-href="#/marca">view</a> -->
-	<!-- 		    <div ng-if="tab.id == 0" ng-include="'/app/views/produto.jsp'"></div> -->
-	<!-- 		    <div ng-if="tab.id == 1" ng-include="'/app/views/marca.jsp'"></div> -->
-	<!-- 		    <div ng-if="tab.id == 2" ng-include="'/app/views/loginForm.jsp'"></div> -->
-		        
-		   	</md-tab>
-	   	
-	  </md-tabs>
+		<md-toolbar>
+		
+			<div layout="row">
+			
+				<div style="float:left">
+				      <md-button ng-click="homeController.onClickTab(HOME)">
+				      		<h2 class="md-toolbar-tools">HOME</h2>
+				      </md-button>
+				</div>
+			      
+				<div style="float:right">
+					   <md-button ng-click="homeController.onClickTab(LOGOUT)" >
+					      		<h2 class="md-toolbar-tools">logout</h2>
+					   </md-button>
+				</div>
+				
+			</div>
+			
+	    </md-toolbar>
+    
+     	<ng-view></ng-view>
+
+		 <md-tabs md-selected="homeController.selectedTabIndex" flex>
+			    <md-tab ng-click="homeController.onClickTab($index)" ng-repeat="tab in homeController.tabs " ng-disabled="tab.disabled" label="{{tab.title}}">
+			   	</md-tab>
+		 </md-tabs>
 	</div>
 </body>
 </html>
