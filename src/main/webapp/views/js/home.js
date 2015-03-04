@@ -3,132 +3,64 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
 		  function($routeProvider) {
 			    $routeProvider.
 			      when('/marca', {
-				    templateUrl: '/app/views/marca.jsp',
+				    templateUrl: '/app/views/marca/marca.jsp',
 				    controller: 'marcaController'
 			      })
 			      .when('/marca/cadastrar', {
-				    templateUrl: '/app/views/marcaCadastrar.jsp',
-				    controller: 'marcaController',
-				    selectedTabIndex: 0
+				    templateUrl: '/app/views/marca/marcaCadastrar.jsp',
+				    controller: 'marcaController'
 			      })
 			      .when('/marca/listar', {
-				    templateUrl: '/app/views/marcaListar.jsp',
-				    controller: 'marcaController',
-				    selectedTabIndex: 1
+				    templateUrl: '/app/views/marca/marcaListar.jsp',
+				    controller: 'marcaController'
 			      })
 			      .when('/login', {
 			    	  templateUrl: '/app/views/loginForm.jsp',
-			    	  controller: 'marcaController',
+			    	  controller: 'sistemaController'
 			      })
 			      .otherwise({
 			    	  redirectTo: "/"
 			      })
  		}])
  		
- .run( function($rootScope, $location) {
-	 
-    // register listener to watch route changes
-    $rootScope.$on( "$routeChangeStart", function(event, next, current) {
-      if ( $rootScope.loggedUser == null ) {
-        // no logged user, we should be going to #login
-        if ( next.templateUrl != "/loginForm.jsp" ) {
-          // already going to #login, no redirect needed
-        	 // not going to #login, we should redirect now
-            $location.path( "/login" );
-        }
-      }         
-    })
- })
+// .run( function($rootScope, $location) {
+//	 
+//    // register listener to watch route changes
+//    $rootScope.$on( "$routeChangeStart", function(event, next, current) {
+//      if ( $rootScope.loggedUser == null ) {
+//        // no logged user, we should be going to #login
+//        if ( next.templateUrl != "/loginForm.jsp" ) {
+//          // already going to #login, no redirect needed
+//        	 // not going to #login, we should redirect now
+//            $location.path( "/login" );
+//        }
+//      }         
+//    })
+// })
  		
- 		
-  .controller('homeController', function ($scope, $mdDialog, $location) {
+ .controller('indexController', function ($scope, $location) {
 	  
-	$scope.homeController = {};
-	  
-    $scope.homeController.init = function() {
-    	$scope.LOGOUT = -2;
-    	$scope.HOME = -1;
-    	$scope.PRODUTO = 0;
-    	$scope.MARCA = 1;
-    	$scope.LOGAR = 2;
+	$scope.indexController = {};
 
-  	  	var tabs = [
-	        { title: 'PRODUTO', content: "MODULO PRODUTO", id:0},
-	        { title: 'MARCA', content: "MODULO MARCA", id:1},
-	        { title: 'LOGAR', content: "MODULO LOGAR", id:2}
-        ];
-      
-	    $scope.homeController.tabs = tabs;
-	    $scope.homeController.selectedTabIndex = -1;
-	    
-	    
-	    $scope.homeController.initProduto = function () {
-//	    	$scope.marcaController.cadastrar = {};
-//	    	$scope.marcaController.cadastrar.marca = {};
-	    };
-	    
-	    $scope.homeController.initMarca = function () {
-//	    	$scope.marcaController.marcas = {};
-	    };
-	    
-	    $scope.homeController.initLogar = function () {
-//	    	$scope.marcaController.alterar = {};
-//	    	$scope.marcaController.alterar.comboBoxMarca = {};
-	    };
-      
-	    $scope.homeController.initProduto();
-    	$scope.homeController.initMarca();
-    	$scope.homeController.initLogar();
-    	
-    	$scope.homeController.changeToMarca = function () {
-    		$scope.homeController.initMarca();
-	    };
-	    
-	    $scope.homeController.changeToProduto = function () {
-	    	$scope.homeController.initProduto();
-	    	
-	    };
-	    
-	    $scope.homeController.changeToLogar = function () {
-	    	$scope.homeController.initLogar();
-	    };    
-      
-	    $scope.homeController.changeToMarca();
-    	$scope.homeController.changeToProduto();
-    	$scope.homeController.changeToLogar();
-//    	$scope.marcaController.changeToList();
-
-    };
-    
-    $scope.homeController.onClickTab = function(index) {
-    	if(index == $scope.PRODUTO) {
-    		$scope.homeController.changeToProduto();
-    		$location.path("/produto");
-    	} else if (index == $scope.MARCA) {
-    		$scope.homeController.changeToMarca();
-    		$location.path("/marca");
-    	} else if (index == $scope.LOGAR) {
-    		$scope.homeController.changeToLogar();
-    		$location.path("/login");
-    	} else if (index == $scope.LOGOUT) {
+    $scope.indexController.onClick = function(index) {	
+    	if (index == $scope.LOGOUT) {
     		$location.path("/logout")
     	}  else if (index == $scope.HOME) {
-    		$location.path("/")
+    		$location.path("/index")
     	}
-    };
-    
-    
+    };  
+	
+  }) 		
+ 		
 
-  })
-  
   /**
      *  MARCA
      */
   
-  .controller('marcaController', function ($scope, $mdDialog, $route) {
+  .controller('marcaController', function ($scope, $mdDialog, $location) {
 	  
 	$scope.marcaController = {};
-	  
+ 
     $scope.marcaController.init = function() {
     	
     	$scope.scopeModal = {};
@@ -144,12 +76,6 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
     	$scope.ALTERAR = 2;
     	$scope.DELETAR = 3;
     	
-    	$scope.marcaController.INSERT_STATE = "INSERT";
-  	  	$scope.marcaController.LIST_STATE = "LIST";
-  	  	$scope.marcaController.ALTER_STATE = "ALTER";
-  	  	$scope.marcaController.DELETE_STATE = "DELETE";
-  	  	$scope.marcaController.CURRENT_STATE = "";
-  	  
   	  	var tabs = [
 	        { title: 'Cadastrar', content: "CADASTRAR MARCA", id:1},
 	        { title: 'Listar', content: "LISTAR MARCA", id:2},
@@ -159,78 +85,19 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
       
 	    $scope.marcaController.tabs = tabs;
 	    
-	    if($route.current.selectedTabIndex == 0) {
-	    	$scope.marcaController.selectedTabIndex = 0;
-	    	$scope.marcaController.initInsert();
-	    }
-	    	
-	    else if($route.current.selectedTabIndex == 1) {
-	    	$scope.marcaController.selectedTabIndex = 1;
-	    	$scope.marcaController.initList();
-	    }
-	    	
-	    else if($route.current.selectedTabIndex == 2)
-	    	$scope.marcaController.selectedTabIndex = 2;
-	    
 	    $scope.marcaController.initInsert = function () {
 	    	$scope.marcaController.cadastrar = {};
 	    	$scope.marcaController.cadastrar.marca = {};
+	    	$location.path("/marca/cadastrar");
 	    };
 	    
 	    $scope.marcaController.initList = function () {
 	    	$scope.marcaController.marcas = {};
-	    };
-	    
-	    $scope.marcaController.initAlter = function () {
-	    	$scope.marcaController.alterar = {};
-	    	$scope.marcaController.alterar.comboBoxMarca = {};
-	    };
-	    
-	    $scope.marcaController.initDelete = function () {
-
-	    };
-      
-	    $scope.marcaController.initAlter();
-    	$scope.marcaController.initDelete();
-    	
-    	
-    	$scope.marcaController.changeToInsert = function () {
-    		$scope.marcaController.initInsert();
-	    };
-	    
-	    $scope.marcaController.changeToList = function () {
-	    	$scope.marcaController.marcas = {};
 	    	$scope.marcaController.findAllMarca();
-	    	
+	    	$location.path("/marca/listar");
 	    };
-	    
-	    $scope.marcaController.changeToAlter = function () {
-	    	$scope.marcaController.initAlter();
-	    };
-	    
-	    $scope.marcaController.changeToDelete = function () {
-
-	    };
-      
-	    $scope.marcaController.changeToAlter();
-    	$scope.marcaController.changeToDelete();
-    	$scope.marcaController.changeToInsert();
-//    	$scope.marcaController.changeToList();
-
     };
-    
-    $scope.marcaController.onClickTab = function(index) {
-    	if(index == $scope.CADASTRAR) {
-    		$scope.marcaController.changeToInsert();
-    	} else if (index == $scope.LISTAR) {
-    		$scope.marcaController.changeToList();
-    	} else if (index == $scope.ALTERAR) {
-    		$scope.marcaController.changeToAlter();
-    	} else if (index == $scope.DELETAR) {
-    		$scope.marcaController.changeToDelete();
-    	}
-    };
-      
+       
     $scope.marcaController.findAllMarca = function(){
     	marcaServiceDwr.findAllMarca({
   		  callback : function(data){
@@ -247,7 +114,6 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
     }
     
     $scope.marcaController.deletarModal = function() {
-    	
     	$scope.marcaController.showAdvanced(ev, marca, $scope.templateDeletarModal);
     }
     

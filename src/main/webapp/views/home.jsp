@@ -35,34 +35,57 @@
 
 <body ng-app="desafio">
 
-	<div  ng-controller="homeController" layout="column" ng-init="homeController.init()">
-	    
+<div>
+	<div layout="column">
 		<md-toolbar>
-		
-			<div layout="row">
-			
-				<div style="float:left">
-				      <md-button ng-click="homeController.onClickTab(HOME)">
-				      		<h2 class="md-toolbar-tools">HOME</h2>
-				      </md-button>
-				</div>
-			      
-				<div style="float:right">
-					   <md-button ng-click="homeController.onClickTab(LOGOUT)" >
-					      		<h2 class="md-toolbar-tools">logout</h2>
-					   </md-button>
-				</div>
-				
+			<div ng-controller="indexController" ng-init="indexController.init()" layout layout-align="center end">
+				<md-button ng-click="indexController.onClick(LOGOUT)" >logout</md-button>
 			</div>
-			
 	    </md-toolbar>
-    
-     	<ng-view></ng-view>
+			<div layout="row">
+				<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left"  layout="vertical" layout-fill md-is-locked-open="true">
+		           <md-toolbar class="md-theme-indigo">
+		               <h1 class="md-toolbar-tools" layout-align="center">Desafio</h1>
+		           </md-toolbar>
+		           
+		           <div layout="column">
+		           		
+				               <md-button ng-click="produto = !produto">
+				                   Produto
+				               </md-button>
 
-		 <md-tabs md-selected="homeController.selectedTabIndex" flex>
-			    <md-tab ng-click="homeController.onClickTab($index)" ng-repeat="tab in homeController.tabs " ng-disabled="tab.disabled" label="{{tab.title}}">
-			   	</md-tab>
-		 </md-tabs>
+						               	<md-button ng-show="produto">CADASTRAR</md-button>
+						               	<md-button ng-show="produto">LISTAR</md-button>
+					    
+					           <div ng-controller="marcaController" ng-init="marcaController.init()" layout="column">
+				               			<md-button ng-click="marca = !marca">MARCA</md-button>
+				               		
+						               <md-button ng-click="marcaController.initInsert()" ng-show="marca">
+							                  CADASTRAR
+							           </md-button>
+							           <md-button ng-click="marcaController.initList()" ng-show="marca">
+							                  LISTAR
+							           </md-button>
+							   </div>
+					
+				               <md-button ng-click="usuario = !usuario">
+				                   Usuario
+				               </md-button>
+				               
+				               		   <md-button ng-show="usuario">
+							                  CADASTRAR
+							           </md-button>
+							           <md-button ng-show="usuario">
+							                  LISTAR
+							           </md-button>    
+		           </div>
+
+				</md-sidenav>
+				
+			<div ng-view></div>     
+		</div>
 	</div>
+</div>
+
 </body>
 </html>
