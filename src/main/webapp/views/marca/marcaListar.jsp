@@ -1,8 +1,6 @@
-
-
 <div ng-controller="marcaController" ng-init="marcaController.initList()">
-
-	<div layout="row" layout-margin flex >
+	
+	<div layout="row" layout-margin flex>
 		<label>Id</label>
 		<label>Descrição</label>  
 	</div>
@@ -19,7 +17,6 @@
 		  
 		  <md-button ng-click="marcaController.deletarModal($event, marca)" class="md-raised md-primary">
 		  	<md-icon md-svg-src='{{iconDeletar}}'></md-icon>
-<!-- 		  </md-button> -->
 
 			</div>
 		</div>
