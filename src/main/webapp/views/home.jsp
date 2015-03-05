@@ -35,10 +35,10 @@
 
 <body ng-app="desafio">
 
-<div>
+<div ng-controller="indexController" ng-init="indexController.init()">
 	<div layout="column">
 		<md-toolbar>
-			<div ng-controller="indexController" ng-init="indexController.init()" layout layout-align="center end">
+			<div layout layout-align="center end">
 				<md-button ng-click="indexController.onClick(LOGOUT)" >logout</md-button>
 			</div>
 	    </md-toolbar>
@@ -57,13 +57,13 @@
 						               	<md-button ng-show="produto">CADASTRAR</md-button>
 						               	<md-button ng-show="produto">LISTAR</md-button>
 					    
-					           <div ng-controller="marcaController" ng-init="marcaController.init()" layout="column">
+					           <div layout="column">
 				               			<md-button ng-click="marca = !marca">MARCA</md-button>
 				               		
-						               <md-button ng-click="marcaController.initInsert()" ng-show="marca">
+						               <md-button ng-click="indexController.onClick(MARCA_CADASTRAR)" ng-show="marca">
 							                  CADASTRAR
 							           </md-button>
-							           <md-button ng-click="marcaController.initList()" ng-show="marca">
+							           <md-button ng-click="indexController.onClick(MARCA_LISTAR)" ng-show="marca">
 							                  LISTAR
 							           </md-button>
 							   </div>

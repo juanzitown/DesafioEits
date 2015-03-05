@@ -41,12 +41,21 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
  .controller('indexController', function ($scope, $location) {
 	  
 	$scope.indexController = {};
+	
+	$scope.LOGOUT = -1;
+	$scope.HOME = 0;
+	$scope.MARCA_CADASTRAR = 1;
+	$scope.MARCA_LISTAR = 2;
 
     $scope.indexController.onClick = function(index) {	
     	if (index == $scope.LOGOUT) {
     		$location.path("/logout")
     	}  else if (index == $scope.HOME) {
     		$location.path("/index")
+    	} else if (index == $scope.MARCA_CADASTRAR) {
+    		$location.path("/marca/cadastrar")
+    	} else if (index == $scope.MARCA_LISTAR) {
+    		$location.path("/marca/listar")
     	}
     };  
 	
@@ -61,48 +70,29 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
 	  
 	$scope.marcaController = {};
  
-    $scope.marcaController.init = function() {
-    	
+    $scope.marcaController.initInsert = function () {
+    	$scope.marcaController.cadastrar = {};
+    	$scope.marcaController.cadastrar.marca = {};
+    };
+    
+    $scope.marcaController.initList = function () {
     	$scope.scopeModal = {};
     	$scope.scopeModal.marca = {};
     	
     	$scope.iconAlterar = "/app/resources/icons/cake.svg";
     	$scope.iconDeletar = "/app/resources/icons/android.svg";
-    	$scope.templateAlterarModal = "/app/views/marcaAlterarTest.jsp";
-    	$scope.templateDeletarModal = "/app/views/marcaDeletar.jsp";
+    	$scope.templateAlterarModal = "/app/views//marca/marcaAlterar.jsp";
+    	$scope.templateDeletarModal = "/app/views/marca/marcaDeletar.jsp";
     	
-    	$scope.CADASTRAR = 0;
-    	$scope.LISTAR = 1;
-    	$scope.ALTERAR = 2;
-    	$scope.DELETAR = 3;
-    	
-  	  	var tabs = [
-	        { title: 'Cadastrar', content: "CADASTRAR MARCA", id:1},
-	        { title: 'Listar', content: "LISTAR MARCA", id:2},
-	        { title: 'Alterar', content: "ALTERAR MARCA", id:3},
-	        { title: 'Deletar', content: "DELETAR MARCA"}
-        ];
-      
-	    $scope.marcaController.tabs = tabs;
-	    
-	    $scope.marcaController.initInsert = function () {
-	    	$scope.marcaController.cadastrar = {};
-	    	$scope.marcaController.cadastrar.marca = {};
-	    	$location.path("/marca/cadastrar");
-	    };
-	    
-	    $scope.marcaController.initList = function () {
-	    	$scope.marcaController.marcas = {};
-	    	$scope.marcaController.findAllMarca();
-	    	$location.path("/marca/listar");
-	    };
+    	$scope.marcaController.marcas = {};
+    	$scope.marcaController.findAllMarca();
     };
        
     $scope.marcaController.findAllMarca = function(){
     	marcaServiceDwr.findAllMarca({
-  		  callback : function(data){
+  		  callback : function(data){  			  
   			  $scope.marcaController.marcas = data;
-  			  $scope.$apply();
+  			  $scope.$apply();  			  
   		  },
   		  errorHandler : function(){	
   		  }
@@ -127,7 +117,7 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
           }
         })
         .then(function(marcaAlterada) {
-        	if(marcaAlterada != marca) {
+        	if(marcaAlterada.descricao != marca.descricao) {
         		$scope.marcaController.alterMarca(marcaAlterada);
         		$scope.marcaController.changeToList();
         	}
@@ -165,8 +155,6 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
 				 alert("Não foi possivel cadastrar Marca");
 		  }
 		 });
-		 
-		 $scope.marcaController.initInsert();
     };
     
     /**
@@ -184,8 +172,6 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
 			// Show a popup message
 				 alert("Não foi possivel cadastrar Marca");
 		  }
-		 });
-		 
-		 $scope.marcaController.initAlter();	 
+		 });	 
    };
   })
