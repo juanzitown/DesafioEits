@@ -86,17 +86,17 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
     };
     
     $scope.produtoController.initList = function () {
-    	$scope.produtoController.findAllMarca();
+    	$scope.produtoController.produtos = {};
     	$scope.scopeModal = {};
     	$scope.scopeModal.produto = {};
     	
+    	$scope.produtoController.findAllMarca();
+    	$scope.produtoController.findAllProduto();
+    	
     	$scope.iconAlterar = "/app/resources/icons/cake.svg";
     	$scope.iconDeletar = "/app/resources/icons/android.svg";
-    	$scope.templateAlterarModal = "/app/views//marca/marcaAlterar.jsp";
+    	$scope.templateAlterarModal = "/app/views/produto/produtoAlterar.jsp";
     	$scope.templateDeletarModal = "/app/views/marca/marcaDeletar.jsp";
-    	
-    	$scope.produtoController.produtos = {};
-    	$scope.produtoController.findAllproduto();
     };
        
     $scope.produtoController.findAllProduto = function(){
@@ -141,7 +141,6 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
         .then(function(produtoAlterado) {
         	if(produtoAlterado.descricao != produto.descricao) {
         		$scope.produtoController.alterProduto(produtoAlterado);
-        		$scope.produtoController.initList();
         	}
          	
         }, function() {
@@ -180,9 +179,6 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
 		 });
     };
     
-    /**
-     * 
-     */
     $scope.produtoController.alterProduto = function (produto) {
 		  
 		 // Pass two numbers, a callback function, and error function

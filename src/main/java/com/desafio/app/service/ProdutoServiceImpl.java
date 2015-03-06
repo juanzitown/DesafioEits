@@ -1,5 +1,7 @@
 package com.desafio.app.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.directwebremoting.annotations.RemoteMethod;
@@ -29,5 +31,18 @@ public class ProdutoServiceImpl implements ProdutoService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	@RemoteMethod
+	public List<Produto> findAllProduto() {
+		return produtoRepository.findAll();
+	}
+
+	@Override
+	public Produto alterProduto(Produto produto) {
+		return produtoRepository.alter(produto);
+	}
+	
+	
 
 }

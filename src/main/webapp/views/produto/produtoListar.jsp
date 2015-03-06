@@ -12,11 +12,11 @@
 			  <label>{{produto.id}}</label>
 			  <label>{{produto.descricao}}</label>
 			  
-			  <md-button ng-click="produtoController.alterarModal($event, marca)" class="md-raised md-primary">
+			  <md-button ng-click="produtoController.alterarModal($event, produto)" class="md-raised md-primary">
 			  		<md-icon md-svg-src='{{iconAlterar}}'></md-icon>
 			  </md-button>
 			  
-			  <md-button ng-click="produtoController.deletarModal($event, marca)" class="md-raised md-primary">
+			  <md-button ng-click="produtoController.deletarModal($event, produto)" class="md-raised md-primary">
 		  			<md-icon md-svg-src='{{iconDeletar}}'></md-icon>
 		  	  </md-button>
 

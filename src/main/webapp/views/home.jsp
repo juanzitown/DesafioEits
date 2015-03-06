@@ -37,7 +37,7 @@
 		
 		<div layout="column">
 			<md-toolbar>
-				<div layout layout-align="center end">
+				<div layout layout-align="end">
 					<md-button ng-click="indexController.onClick(LOGOUT)" >logout</md-button>
 				</div>
 		    </md-toolbar>
@@ -54,7 +54,7 @@
 					               </md-button>
 	
 							               	<md-button ng-click="indexController.onClick(PRODUTO_CADASTRAR)" ng-show="produto">CADASTRAR</md-button>
-							               	<md-button ng-click="indexController.onClick(PRODUTO_LISTAR)" g-show="produto">LISTAR</md-button>
+							               	<md-button ng-click="indexController.onClick(PRODUTO_LISTAR)" ng-show="produto">LISTAR</md-button>
 						    
 						           <div layout="column">
 					               			<md-button ng-click="marca = !marca">MARCA</md-button>

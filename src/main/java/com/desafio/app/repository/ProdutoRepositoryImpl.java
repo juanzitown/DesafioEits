@@ -1,7 +1,10 @@
 package com.desafio.app.repository;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
@@ -23,6 +26,18 @@ public class ProdutoRepositoryImpl implements ProdutoRepository {
 	@Override
 	public Produto find(Long id) {
 		return null;
+	}
+
+	@Override
+	public List<Produto> findAll() {
+		Query query = entityManager.createQuery("SELECT e FROM Produto e");
+		return query.getResultList();
+	}
+
+	@Override
+	public Produto alter(Produto produto) {
+		entityManager.merge(produto);
+		return produto;
 	}
 
 }
