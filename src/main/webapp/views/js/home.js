@@ -89,8 +89,7 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
     	$scope.produtoController.produtos = {};
     	$scope.scopeModal = {};
     	$scope.scopeModal.produto = {};
-    	
-    	$scope.produtoController.findAllMarca();
+    
     	$scope.produtoController.findAllProduto();
     	
     	$scope.iconAlterar = "/app/resources/icons/cake.svg";
