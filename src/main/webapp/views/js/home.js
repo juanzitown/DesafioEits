@@ -1,11 +1,7 @@
 angular.module('desafio', ['ngMaterial', 'ngRoute'])
 	.config(['$routeProvider',
 		  function($routeProvider) {
-			    $routeProvider.
-			      when('/marca', {
-				    templateUrl: '/app/views/marca/marca.jsp',
-				    controller: 'marcaController'
-			      })
+			    $routeProvider
 			      .when('/marca/cadastrar', {
 				    templateUrl: '/app/views/marca/marcaCadastrar.jsp',
 				    controller: 'marcaController'
@@ -13,6 +9,14 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
 			      .when('/marca/listar', {
 				    templateUrl: '/app/views/marca/marcaListar.jsp',
 				    controller: 'marcaController'
+			      })
+			      .when('/produto/cadastrar', {
+				    templateUrl: '/app/views/produto/produtoCadastrar.jsp',
+				    controller: 'produtoController'
+			      })
+			      .when('/produto/listar', {
+				    templateUrl: '/app/views/produto/produtoListar.jsp',
+				    controller: 'produtoController'
 			      })
 			      .when('/login', {
 			    	  templateUrl: '/app/views/loginForm.jsp',
@@ -43,9 +47,11 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
 	$scope.indexController = {};
 	
 	$scope.LOGOUT = -1;
-	$scope.HOME = 0;
+	$scope.HOME = 0;00
 	$scope.MARCA_CADASTRAR = 1;
 	$scope.MARCA_LISTAR = 2;
+	$scope.PRODUTO_CADASTRAR = 3;
+	$scope.PRODUTO_LISTAR = 4;
 
     $scope.indexController.onClick = function(index) {	
     	if (index == $scope.LOGOUT) {
@@ -56,10 +62,142 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
     		$location.path("/marca/cadastrar")
     	} else if (index == $scope.MARCA_LISTAR) {
     		$location.path("/marca/listar")
+    	} else if (index == $scope.PRODUTO_CADASTRAR) {
+    		$location.path("/produto/cadastrar")
+    	} else if (index == $scope.PRODUTO_LISTAR) {
+    		$location.path("/produto/listar")
     	}
     };  
 	
-  }) 		
+  })
+  
+  /**
+     *  PRODUTO
+     */
+  
+  .controller('produtoController', function ($scope, $mdDialog, $location) {
+	  
+	$scope.produtoController = {};
+ 
+    $scope.produtoController.initInsert = function () {
+    	$scope.produtoController.cadastrar = {};
+    	$scope.produtoController.cadastrar.marca = {};
+    	$scope.produtoController.findAllMarca();
+    };
+    
+    $scope.produtoController.initList = function () {
+    	$scope.produtoController.findAllMarca();
+    	$scope.scopeModal = {};
+    	$scope.scopeModal.produto = {};
+    	
+    	$scope.iconAlterar = "/app/resources/icons/cake.svg";
+    	$scope.iconDeletar = "/app/resources/icons/android.svg";
+    	$scope.templateAlterarModal = "/app/views//marca/marcaAlterar.jsp";
+    	$scope.templateDeletarModal = "/app/views/marca/marcaDeletar.jsp";
+    	
+    	$scope.produtoController.produtos = {};
+    	$scope.produtoController.findAllproduto();
+    };
+       
+    $scope.produtoController.findAllProduto = function(){
+    	produtoServiceDwr.findAllProduto({
+  		  callback : function(data){  			  
+  			  $scope.produtoController.produtos = data;
+  			  $scope.$apply();  			  
+  		  },
+  		  errorHandler : function(){	
+  		  }
+  		 });
+    };
+    
+    $scope.produtoController.findAllMarca = function(){
+    	marcaServiceDwr.findAllMarca({
+  		  callback : function(data){  			  
+  			  $scope.produtoController.marcas = data;
+  			  $scope.$apply();  			  
+  		  },
+  		  errorHandler : function(){	
+  		  }
+  		 });
+    };
+    
+    $scope.produtoController.alterarModal = function(ev, produto) {
+    	$scope.produtoController.showAdvanced(ev, produto, $scope.templateAlterarModal);
+    }
+    
+    $scope.produtoController.deletarModal = function() {
+    	$scope.produtoController.showAdvanced(ev, produto, $scope.templateDeletarModal);
+    }
+    
+    $scope.produtoController.showAdvanced = function(ev, produto, template) {
+        $mdDialog.show({
+          controller: DialogController,
+          templateUrl: template,
+          targetEvent: ev,
+          locals: {
+        	  produto: produto
+          }
+        })
+        .then(function(produtoAlterado) {
+        	if(produtoAlterado.descricao != produto.descricao) {
+        		$scope.produtoController.alterProduto(produtoAlterado);
+        		$scope.produtoController.initList();
+        	}
+         	
+        }, function() {
+//        	alert('Modal Cancelada pelo usuario.');
+        });
+      };
+      
+      function DialogController($scope, $mdDialog, produto) {
+    	  $scope.produto = angular.copy(produto);
+    	  $scope.hide = function() {
+    	    $mdDialog.hide();
+    	  };
+    	  $scope.cancel = function() {
+    	    $mdDialog.cancel();
+    	  };
+    	  $scope.answer = function(answer) {
+    	    $mdDialog.hide(answer);
+    	  };
+    	}
+    
+    $scope.produtoController.saveProduto = function () {
+		 // Retrieve value of text inputs
+		 var produto = $scope.produtoController.cadastrar.produto;
+		 produto.marca = $scope.produtoController.cadastrar.cbMarca;
+		  
+		 // Pass two numbers, a callback function, and error function
+		 produtoServiceDwr.saveProduto(produto, {
+		  callback : function(data){
+			  $scope.produtoController.cadastrar.resultado = data.descricao + " Salvo com sucesso!";
+			  alert($scope.produtoController.cadastrar.resultado);
+		  },
+		  errorHandler : function(){
+			// Show a popup message
+				 alert("Não foi possivel cadastrar Marca");
+		  }
+		 });
+    };
+    
+    /**
+     * 
+     */
+    $scope.produtoController.alterProduto = function (produto) {
+		  
+		 // Pass two numbers, a callback function, and error function
+    	produtoServiceDwr.alterProduto(produto, {
+		  callback : function(data){
+			  $scope.produtoController.alterar.resultado = data.descricao + " Alterado com sucesso!";
+			  alert($scope.produtoController.alterar.resultado);
+		  },
+		  errorHandler : function(){
+			// Show a popup message
+				 alert("Não foi possivel cadastrar Marca");
+		  }
+		 });	 
+   };
+  })
  		
 
   /**
@@ -119,7 +257,7 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
         .then(function(marcaAlterada) {
         	if(marcaAlterada.descricao != marca.descricao) {
         		$scope.marcaController.alterMarca(marcaAlterada);
-        		$scope.marcaController.changeToList();
+        		$scope.marcaController.initList();
         	}
          	
         }, function() {

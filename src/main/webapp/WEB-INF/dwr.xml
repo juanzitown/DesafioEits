@@ -11,11 +11,13 @@
       <param name="beanName" value="marcaServiceImpl"/>
     </create>
     
+    <create creator="spring" javascript="produtoServiceDwr">
+      <param name="beanName" value="produtoServiceImpl"/>
+    </create>
+    
     <create creator="spring" javascript="usuarioServiceDwr">
       <param name="beanName" value="usuarioServiceImpl"/>
     </create>
     
   </allow>
-  
-  <convert converter="bean" match="com.desafio.app.model.Marca"/>
 </dwr>

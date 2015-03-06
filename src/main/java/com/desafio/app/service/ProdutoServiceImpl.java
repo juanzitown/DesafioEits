@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 import com.desafio.app.model.Produto;
 import com.desafio.app.repository.ProdutoRepository;
 
-
-@Service("produtoService")
 @RemoteProxy(name="produtoServiceDwr")
 @Transactional
 public class ProdutoServiceImpl implements ProdutoService{

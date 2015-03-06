@@ -25,6 +25,7 @@
    	<script type='text/javascript' src="/app/dwr/engine.js"></script>
    	<script type='text/javascript' src="/app/dwr/util.js"></script>
    	<script type="text/javascript" src="/app/dwr/interface/marcaServiceDwr.js"></script>
+   	<script type="text/javascript" src="/app/dwr/interface/produtoServiceDwr.js"></script>
    	
 	<!-- APP JS -->
 	<script src="/app/views/js/home.js"></script>
@@ -52,8 +53,8 @@
 					                   Produto
 					               </md-button>
 	
-							               	<md-button ng-show="produto">CADASTRAR</md-button>
-							               	<md-button ng-show="produto">LISTAR</md-button>
+							               	<md-button ng-click="indexController.onClick(PRODUTO_CADASTRAR)" ng-show="produto">CADASTRAR</md-button>
+							               	<md-button ng-click="indexController.onClick(PRODUTO_LISTAR)" g-show="produto">LISTAR</md-button>
 						    
 						           <div layout="column">
 					               			<md-button ng-click="marca = !marca">MARCA</md-button>
