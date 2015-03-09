@@ -1,10 +1,15 @@
 package com.desafio.app.service;
 
+import java.util.List;
+
+import com.desafio.app.model.Produto;
 import com.desafio.app.model.Usuario;
 
 public interface UsuarioService {
 
-	public Usuario findUser(String username, String password);
-	public Usuario saveUser(String username, String password, String nome);
+	public Usuario saveUsuario(Usuario user);
+	public Usuario findUsuario(Long id);
+	public List<Usuario> findAllUsuario();
+	public Usuario alterUsuario(Usuario user);
 
 }

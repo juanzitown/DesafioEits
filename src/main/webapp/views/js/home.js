@@ -18,6 +18,14 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
 				    templateUrl: '/app/views/produto/produtoListar.jsp',
 				    controller: 'produtoController'
 			      })
+			      .when('/usuario/cadastrar', {
+				    templateUrl: '/app/views/usuario/usuarioCadastrar.jsp',
+				    controller: 'usuarioController'
+			      })
+			      .when('/usuario/listar', {
+				    templateUrl: '/app/views/usuario/usuarioListar.jsp',
+				    controller: 'usuarioController'
+			      })
 			      .when('/login', {
 			    	  templateUrl: '/app/views/loginForm.jsp',
 			    	  controller: 'sistemaController'
@@ -47,12 +55,14 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
 	$scope.indexController = {};
 	
 	$scope.LOGOUT = -1;
-	$scope.HOME = 0;00
+	$scope.HOME = 0;
 	$scope.MARCA_CADASTRAR = 1;
 	$scope.MARCA_LISTAR = 2;
 	$scope.PRODUTO_CADASTRAR = 3;
 	$scope.PRODUTO_LISTAR = 4;
-
+	$scope.USUARIO_CADASTRAR = 5;
+	$scope.USUARIO_LISTAR = 6;
+	
     $scope.indexController.onClick = function(index) {	
     	if (index == $scope.LOGOUT) {
     		$location.path("/logout")
@@ -66,6 +76,10 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
     		$location.path("/produto/cadastrar")
     	} else if (index == $scope.PRODUTO_LISTAR) {
     		$location.path("/produto/listar")
+    	} else if (index == $scope.USUARIO_CADASTRAR) {
+    		$location.path("/usuario/cadastrar")
+    	} else if (index == $scope.USUARIO_LISTAR) {
+    		$location.path("/usuario/listar")
     	}
     };  
 	
@@ -300,6 +314,132 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
 		  callback : function(data){
 			  $scope.marcaController.alterar.resultado = data.descricao + " Alterado com sucesso!";
 			  alert($scope.marcaController.alterar.resultado);
+		  },
+		  errorHandler : function(){
+			// Show a popup message
+				 alert("Não foi possivel cadastrar Marca");
+		  }
+		 });	 
+   };
+  })
+  
+  
+    /**
+     *  USUARIO
+     */
+  
+  .controller('usuarioController', function ($scope, $mdDialog, $location) {
+	  
+	$scope.usuarioController = {};
+ 
+    $scope.usuarioController.initInsert = function () {
+    	$scope.usuarioController.roles = {};
+    	$scope.usuarioController.cadastrar = {};
+    	$scope.usuarioController.cadastrar.usuario = {};
+    	$scope.usuarioController.findAllRole();
+    };
+    
+    $scope.usuarioController.initList = function () {
+    	$scope.usuarioController.usuarios = {};
+    	$scope.usuarioController.findAllUsuario();
+    	
+    	$scope.usuarioController.roles = {};
+    	$scope.scopeModal = {};
+    	$scope.scopeModal.usuario = {};
+    	
+    	$scope.iconAlterar = "/app/resources/icons/cake.svg";
+    	$scope.iconDeletar = "/app/resources/icons/android.svg";
+    	$scope.templateAlterarModal = "/app/views/produto/produtoAlterar.jsp";
+    	$scope.templateDeletarModal = "/app/views/marca/marcaDeletar.jsp";
+    };
+       
+    $scope.usuarioController.findAllUsuario = function(){
+    	usuarioServiceDwr.findAllUsuario({
+  		  callback : function(data){  			  
+  			  $scope.usuarioController.usuarios = data;
+  			  $scope.$apply();  			  
+  		  },
+  		  errorHandler : function(){	
+  		  }
+  		 });
+    };
+    
+    $scope.usuarioController.findAllRole = function(){
+    	roleServiceDwr.findAllRole({
+  		  callback : function(data){  			  
+  			  $scope.usuarioController.roles = data;
+  			  $scope.$apply();  			  
+  		  },
+  		  errorHandler : function(){	
+  		  }
+  		 });
+    };
+    
+    $scope.usuarioController.alterarModal = function(ev, usuario) {
+    	$scope.usuarioController.showAdvanced(ev, usuario, $scope.templateAlterarModal);
+    }
+    
+    $scope.usuarioController.deletarModal = function() {
+    	$scope.usuarioController.showAdvanced(ev, usuario, $scope.templateDeletarModal);
+    }
+    
+    $scope.usuarioController.showAdvanced = function(ev, usuario, template) {
+        $mdDialog.show({
+          controller: DialogController,
+          templateUrl: template,
+          targetEvent: ev,
+          locals: {
+        	  usuario: usuario
+          }
+        })
+        .then(function(usuarioAlterado) {
+        	if(usuarioAlterado.nome != usuario.nome) {
+        		$scope.usuarioController.alterUsuario(usuarioAlterado);
+        	}
+         	
+        }, function() {
+//        	alert('Modal Cancelada pelo usuario.');
+        });
+      };
+      
+      function DialogController($scope, $mdDialog, usuario) {
+    	  $scope.usuario = angular.copy(usuario);
+    	  $scope.hide = function() {
+    	    $mdDialog.hide();
+    	  };
+    	  $scope.cancel = function() {
+    	    $mdDialog.cancel();
+    	  };
+    	  $scope.answer = function(answer) {
+    	    $mdDialog.hide(answer);
+    	  };
+    	}
+    
+    $scope.usuarioController.saveUsuario = function () {
+		 // Retrieve value of text inputs
+		 var usuario = $scope.usuarioController.cadastrar.usuario;
+		 usuario.roleUsuario = $scope.usuarioController.cadastrar.cbRole;
+		  
+		 // Pass two numbers, a callback function, and error function
+		 usuarioServiceDwr.saveUsuario(usuario, {
+		  callback : function(data){
+			  $scope.usuarioController.cadastrar.resultado = data.nome + " Salvo com sucesso!";
+			  alert($scope.usuarioController.cadastrar.resultado);
+		  },
+		  errorHandler : function(){
+			// Show a popup message
+				 alert("Não foi possivel cadastrar Marca");
+		  }
+		 });
+    };
+    
+    $scope.usuarioController.alterUsuario = function (usuario) {
+		  
+		 // Pass two numbers, a callback function, and error function
+    	usuarioServiceDwr.alterProduto(usuario, {
+		  callback : function(data){
+			  $scope.usuarioController.alterar.resultado = data.nome + " Alterado com sucesso!";
+			  alert($scope.usuarioController.alterar.resultado);
 		  },
 		  errorHandler : function(){
 			// Show a popup message

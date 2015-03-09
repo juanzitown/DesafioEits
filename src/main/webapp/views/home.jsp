@@ -26,6 +26,8 @@
    	<script type='text/javascript' src="/app/dwr/util.js"></script>
    	<script type="text/javascript" src="/app/dwr/interface/marcaServiceDwr.js"></script>
    	<script type="text/javascript" src="/app/dwr/interface/produtoServiceDwr.js"></script>
+   	<script type="text/javascript" src="/app/dwr/interface/usuarioServiceDwr.js"></script>
+   	<script type="text/javascript" src="/app/dwr/interface/roleServiceDwr.js"></script>
    	
 	<!-- APP JS -->
 	<script src="/app/views/js/home.js"></script>
@@ -71,10 +73,10 @@
 					                   Usuario
 					               </md-button>
 					               
-					               		   <md-button ng-show="usuario">
+					               		   <md-button ng-show="usuario" ng-click="indexController.onClick(USUARIO_CADASTRAR)">
 								                  CADASTRAR
 								           </md-button>
-								           <md-button ng-show="usuario">
+								           <md-button ng-show="usuario" ng-click="indexController.onClick(USUARIO_LISTAR)">
 								                  LISTAR
 								           </md-button>    
 			           </div>

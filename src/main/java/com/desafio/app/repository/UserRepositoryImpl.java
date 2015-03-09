@@ -1,7 +1,10 @@
 package com.desafio.app.repository;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
@@ -23,5 +26,17 @@ public class UserRepositoryImpl implements UserRepository {
 	@Override
 	public Usuario findUser(Long id) {
 		return entityManager.find(Usuario.class, id);
+	}
+
+	@Override
+	public List<Usuario> findAllUser() {
+		Query query = entityManager.createQuery("SELECT e FROM Usuario e");
+		return (List<Usuario>) query.getResultList();
+	}
+
+	@Override
+	public Usuario alterUser(Usuario user) {
+		entityManager.merge(user);
+		return user;
 	}
 }

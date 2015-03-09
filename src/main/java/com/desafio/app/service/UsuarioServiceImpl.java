@@ -1,7 +1,10 @@
 package com.desafio.app.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
+import org.directwebremoting.annotations.RemoteMethod;
 import org.directwebremoting.annotations.RemoteProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,20 +21,28 @@ public class UsuarioServiceImpl implements UsuarioService{
 	private UserRepository userRepository;
 
 	@Override
-	public Usuario findUser(String username, String password) {
-		Usuario usuario = new Usuario();
-		usuario.setUsuario(username);
-		usuario.setPassword(password);
-		return userRepository.findUser(1L);
+	@RemoteMethod
+	public Usuario saveUsuario(Usuario user) {
+		return userRepository.saveUser(user);
 	}
 
 	@Override
-	public Usuario saveUser(String username, String password, String nome) {
-		Usuario usuario = new Usuario();
-		usuario.setUsuario(username);
-		usuario.setPassword(password);
-		usuario.setNome(nome);
-		return userRepository.saveUser(usuario);
+	@RemoteMethod
+	public Usuario findUsuario(Long id) {
+		return findUsuario(id);
 	}
+
+	@Override
+	@RemoteMethod
+	public List<Usuario> findAllUsuario() {
+		return userRepository.findAllUser();
+	}
+
+	@Override
+	@RemoteMethod
+	public Usuario alterUsuario(Usuario user) {
+		return userRepository.alterUser(user);
+	}
+
 
 }

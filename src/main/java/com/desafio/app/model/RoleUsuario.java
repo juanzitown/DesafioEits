@@ -1,5 +1,6 @@
 package com.desafio.app.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,7 +15,9 @@ public class RoleUsuario {
 
 	@Id
 	@GeneratedValue
+	@Column(name="id")
 	private Long id;
+
 	private String role;
 	
 	public Long getId() {

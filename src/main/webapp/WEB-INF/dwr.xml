@@ -19,5 +19,9 @@
       <param name="beanName" value="usuarioServiceImpl"/>
     </create>
     
+    <create creator="spring" javascript="roleServiceDwr">
+      <param name="beanName" value="roleServiceImpl"/>
+    </create>
+    
   </allow>
 </dwr>
