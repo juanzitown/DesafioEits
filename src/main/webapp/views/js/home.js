@@ -349,8 +349,8 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
     	
     	$scope.iconAlterar = "/app/resources/icons/cake.svg";
     	$scope.iconDeletar = "/app/resources/icons/android.svg";
-    	$scope.templateAlterarModal = "/app/views/produto/produtoAlterar.jsp";
-    	$scope.templateDeletarModal = "/app/views/marca/marcaDeletar.jsp";
+    	$scope.templateAlterarModal = "/app/views/usuario/usuarioAlterar.jsp";
+    	$scope.templateDeletarModal = "/app/views/usuario/usuarioDeletar.jsp";
     };
        
     $scope.usuarioController.findAllUsuario = function(){
@@ -436,10 +436,9 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
     $scope.usuarioController.alterUsuario = function (usuario) {
 		  
 		 // Pass two numbers, a callback function, and error function
-    	usuarioServiceDwr.alterProduto(usuario, {
+    	usuarioServiceDwr.alterUsuario(usuario, {
 		  callback : function(data){
-			  $scope.usuarioController.alterar.resultado = data.nome + " Alterado com sucesso!";
-			  alert($scope.usuarioController.alterar.resultado);
+			  alert(data.nome + " Alterado com sucesso!");
 		  },
 		  errorHandler : function(){
 			// Show a popup message

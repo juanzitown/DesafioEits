@@ -1,4 +1,4 @@
-<div ng-controller="produtoController" ng-init="produtoController.findAllMarca()">
+<div ng-controller="usuarioController" ng-init="usuarioController.findAllRole()">
 	<md-dialog>
 	
 	  <md-content>
@@ -6,19 +6,29 @@
 				<div layout="row">
 					<md-input-container flex >
 				        <label>Id</label>
-				        <label>{{produto.id}}</label>
+				        <label>{{usuario.id}}</label>
 			        </md-input-container> 
 			    </div>
 			    
 			    <div>
 			    	<md-input-container flex >
-			        	<label>Descricao</label>
-			          	<input ng-model="produto.descricao" value="{{produto.descricao}}">
+			        	<label>Nome</label>
+			          	<input ng-model="usuario.nome" value="{{usuario.nome}}">
+			        </md-input-container>
+			        
+			        <md-input-container flex >
+			        	<label>Username</label>
+			          	<input ng-model="usuario.username" value="{{usuario.username}}">
+			        </md-input-container>
+			        
+			        <md-input-container flex >
+			        	<label>Password</label>
+			          	<input type="password" ng-model="usuario.password" value="{{usuario.password}}">
 			        </md-input-container>
 			    </div>    
 
-			    <md-select ng-model="produto.marca" placeholder="{{produto.marca.descricao}}">
-					<md-option ng-value="marca" ng-repeat="marca in produtoController.marcas">{{ marca.descricao }}</md-option>
+			    <md-select ng-model="usuario.roleUsuario" placeholder="{{usuario.roleUsuario.role}}">
+					<md-option ng-value="role" ng-repeat="role in usuarioController.roles">{{ role.role}}</md-option>
 		 		</md-select> 
 		 
 			</div>
@@ -29,7 +39,7 @@
 	    <md-button ng-click="cancel()">
 	     CANCELAR
 	    </md-button>
-	    <md-button ng-click="answer(produto)" class="md-primary">
+	    <md-button ng-click="answer(usuario)" class="md-primary">
 	     	ALTERAR
 	    </md-button>
 	  </div>
