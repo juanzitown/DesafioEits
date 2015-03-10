@@ -43,5 +43,10 @@ public class MarcaServiceImpl implements MarcaService{
 	public Marca alterMarca(Marca marca) {
 		return marcaRepository.alterMarca(marca);
 	}
+	
+	@Override
+	public void deleteMarca(Marca marca) {
+		marcaRepository.delete(marca);
+	}
 
 }

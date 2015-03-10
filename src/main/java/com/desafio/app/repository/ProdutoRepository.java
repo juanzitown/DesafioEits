@@ -10,5 +10,6 @@ public interface ProdutoRepository {
 	public Produto find(Long id);
 	public List<Produto> findAll();
 	public Produto alter(Produto produto);
+	public void delete(Produto produto);
 
 }

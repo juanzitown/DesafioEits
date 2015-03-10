@@ -10,4 +10,5 @@ public interface MarcaService {
 	public Marca findMarca(Long id);
 	public List<Marca> findAllMarca();
 	public Marca alterMarca(Marca marca);
+	void deleteMarca(Marca marca);
 }

@@ -1,5 +1,7 @@
 package com.desafio.app.model;
 
+import java.util.Calendar;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,6 +23,9 @@ public class Produto {
 	private Long id;
 	
 	private String descricao;
+	
+	private Calendar dataCriacao;
+	private Calendar dataAlteracao;
 	
 	@ManyToOne
 	@JoinColumn(name="idMarca")
@@ -44,5 +49,17 @@ public class Produto {
 	}
 	public void setMarca(Marca marca) {
 		this.marca = marca;
+	}
+	public Calendar getDataCriacao() {
+		return dataCriacao;
+	}
+	public void setDataCriacao(Calendar dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
+	public Calendar getDataAlteracao() {
+		return dataAlteracao;
+	}
+	public void setDataAlteracao(Calendar dataAlteracao) {
+		this.dataAlteracao = dataAlteracao;
 	}
 }

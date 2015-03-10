@@ -10,4 +10,5 @@ public interface MarcaRepository {
 	public Marca find(Long id);
 	public List<Marca> findAllMarca();
 	public Marca alterMarca(Marca marca);
+	public void delete(Marca marca);
 }

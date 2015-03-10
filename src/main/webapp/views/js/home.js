@@ -63,6 +63,9 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
 	$scope.USUARIO_CADASTRAR = 5;
 	$scope.USUARIO_LISTAR = 6;
 	
+	$scope.DELETAR = 10;
+	$scope.ALTERAR = 11;
+	
     $scope.indexController.onClick = function(index) {	
     	if (index == $scope.LOGOUT) {
     		$location.path("/logout")
@@ -109,7 +112,7 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
     	$scope.iconAlterar = "/app/resources/icons/cake.svg";
     	$scope.iconDeletar = "/app/resources/icons/android.svg";
     	$scope.templateAlterarModal = "/app/views/produto/produtoAlterar.jsp";
-    	$scope.templateDeletarModal = "/app/views/marca/marcaDeletar.jsp";
+    	$scope.templateDeletarModal = "/app/views/produto/produtoDeletar.jsp";
     };
        
     $scope.produtoController.findAllProduto = function(){
@@ -136,10 +139,12 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
     
     $scope.produtoController.alterarModal = function(ev, produto) {
     	$scope.produtoController.showAdvanced(ev, produto, $scope.templateAlterarModal);
+    	produto.op = $scope.ALTERAR;
     }
     
-    $scope.produtoController.deletarModal = function() {
+    $scope.produtoController.deletarModal = function(ev, produto) {
     	$scope.produtoController.showAdvanced(ev, produto, $scope.templateDeletarModal);
+    	produto.op = $scope.DELETAR;
     }
     
     $scope.produtoController.showAdvanced = function(ev, produto, template) {
@@ -151,9 +156,16 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
         	  produto: produto
           }
         })
-        .then(function(produtoAlterado) {
-        	if(produtoAlterado.descricao != produto.descricao) {
-        		$scope.produtoController.alterProduto(produtoAlterado);
+        .then(function(produtoResposta) {
+        	if(produtoResposta.op == $scope.DELETAR) {
+        		delete produtoResposta.op;
+        		delete produtoResposta.marca.$$mdSelectId;
+        		$scope.produtoController.deleteProduto(produtoResposta);
+        	}
+        	else if (produtoResposta.op == $scope.ALTERAR) {
+	        	if(produtoResposta.descricao != produto.descricao) {
+	        		$scope.produtoController.alterProduto(produtoResposta);
+	        	}
         	}
          	
         }, function() {
@@ -182,12 +194,11 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
 		 // Pass two numbers, a callback function, and error function
 		 produtoServiceDwr.saveProduto(produto, {
 		  callback : function(data){
-			  $scope.produtoController.cadastrar.resultado = data.descricao + " Salvo com sucesso!";
-			  alert($scope.produtoController.cadastrar.resultado);
+			  alert(data.descricao + " Salvo com sucesso!");
 		  },
 		  errorHandler : function(){
 			// Show a popup message
-				 alert("Não foi possivel cadastrar Marca");
+				 alert("Não foi possivel cadastrar Produto");
 		  }
 		 });
     };
@@ -197,16 +208,29 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
 		 // Pass two numbers, a callback function, and error function
     	produtoServiceDwr.alterProduto(produto, {
 		  callback : function(data){
-			  $scope.produtoController.alterar.resultado = data.descricao + " Alterado com sucesso!";
-			  alert($scope.produtoController.alterar.resultado);
+			  alert(data.descricao + " Alterado com sucesso!");
 		  },
 		  errorHandler : function(){
 			// Show a popup message
-				 alert("Não foi possivel cadastrar Marca");
+				 alert("Não foi possivel alterar Produto");
 		  }
 		 });	 
    };
-  })
+   
+   $scope.produtoController.deleteProduto = function (produto) {
+		  
+		 // Pass two numbers, a callback function, and error function
+  	produtoServiceDwr.deleteProduto(produto, {
+		  callback : function(data){
+			  alert("Deletado com sucesso!");
+		  },
+		  errorHandler : function(){
+			// Show a popup message
+				 alert("Não foi possivel deletar Produto");
+		  }
+		 });	 
+   };
+ })
  		
 
   /**
@@ -248,10 +272,12 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
     
     $scope.marcaController.alterarModal = function(ev, marca) {
     	$scope.marcaController.showAdvanced(ev, marca, $scope.templateAlterarModal);
+    	marca.op = $scope.ALTERAR;
     }
     
-    $scope.marcaController.deletarModal = function() {
+    $scope.marcaController.deletarModal = function(ev, marca) {
     	$scope.marcaController.showAdvanced(ev, marca, $scope.templateDeletarModal);
+    	marca.op = $scope.DELETAR;
     }
     
     $scope.marcaController.showAdvanced = function(ev, marca, template) {
@@ -263,10 +289,15 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
         	  marca: marca
           }
         })
-        .then(function(marcaAlterada) {
-        	if(marcaAlterada.descricao != marca.descricao) {
-        		$scope.marcaController.alterMarca(marcaAlterada);
-        		$scope.marcaController.initList();
+        .then(function(marcaResposta) {
+        	if(marcaResposta.op == $scope.DELETAR) {
+        		$scope.marcaController.deleteMarca(marcaResposta)
+        	}
+        	else if (marcaResposta.op == $scope.ALTERAR) {
+	        	if(marcaResposta.descricao != marca.descricao) {
+	        		$scope.marcaController.alterMarca(marcaResposta);
+	        		$scope.marcaController.initList();
+	        	}
         	}
          	
         }, function() {
@@ -284,6 +315,7 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
     	  };
     	  $scope.answer = function(answer) {
     	    $mdDialog.hide(answer);
+    	    
     	  };
     	}
     
@@ -294,8 +326,7 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
 		 // Pass two numbers, a callback function, and error function
 		 marcaServiceDwr.saveMarca(marca, {
 		  callback : function(data){
-			  $scope.marcaController.cadastrar.resultado = data.descricao + " Salvo com sucesso!";
-			  alert($scope.marcaController.cadastrar.resultado);
+			  alert(data.descricao + " Salvo com sucesso!");
 		  },
 		  errorHandler : function(){
 			// Show a popup message
@@ -312,15 +343,29 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
 		 // Pass two numbers, a callback function, and error function
 		 marcaServiceDwr.alterMarca(marca, {
 		  callback : function(data){
-			  $scope.marcaController.alterar.resultado = data.descricao + " Alterado com sucesso!";
-			  alert($scope.marcaController.alterar.resultado);
+			  alert(data.descricao + " Alterado com sucesso!");
 		  },
 		  errorHandler : function(){
 			// Show a popup message
-				 alert("Não foi possivel cadastrar Marca");
+				 alert("Não foi possivel alterar Marca");
 		  }
 		 });	 
    };
+   
+   $scope.marcaController.deleteMarca = function (marca) {
+		  
+		 // Pass two numbers, a callback function, and error function
+		 marcaServiceDwr.deleteMarca(marca, {
+		  callback : function(data){
+			  alert("Deletado com sucesso!");
+		  },
+		  errorHandler : function(){
+			// Show a popup message
+				 alert("Não foi possivel deletar Marca, existe algum produto cadastrado com esta marca");
+		  }
+		 });	 
+ };
+   
   })
   
   
@@ -423,12 +468,11 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
 		 // Pass two numbers, a callback function, and error function
 		 usuarioServiceDwr.saveUsuario(usuario, {
 		  callback : function(data){
-			  $scope.usuarioController.cadastrar.resultado = data.nome + " Salvo com sucesso!";
-			  alert($scope.usuarioController.cadastrar.resultado);
+			  alert(data.nome + " Salvo com sucesso!");
 		  },
 		  errorHandler : function(){
 			// Show a popup message
-				 alert("Não foi possivel cadastrar Marca");
+				 alert("Não foi possivel cadastrar Usuario");
 		  }
 		 });
     };
@@ -442,7 +486,7 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
 		  },
 		  errorHandler : function(){
 			// Show a popup message
-				 alert("Não foi possivel cadastrar Marca");
+				 alert("Não foi possivel alterar Usuario");
 		  }
 		 });	 
    };

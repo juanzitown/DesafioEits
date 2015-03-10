@@ -10,4 +10,5 @@ public interface ProdutoService {
 	public Produto findProduto(Long id);
 	public List<Produto> findAllProduto();
 	public Produto alterProduto(Produto produto);
+	public void deleteProduto(Produto produto);
 }

@@ -1,5 +1,7 @@
 package com.desafio.app.model;
 
+import java.util.Calendar;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,6 +23,9 @@ public class Marca {
 	
 	private String descricao;
 	
+	private Calendar dataCriacao;
+	private Calendar dataAlteracao;
+	
 	
 	public String getDescricao() {
 		return descricao;
@@ -37,5 +42,17 @@ public class Marca {
 	
 	public String toString() {
 		return descricao;
+	}
+	public Calendar getDataCriacao() {
+		return dataCriacao;
+	}
+	public void setDataCriacao(Calendar dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
+	public Calendar getDataAlteracao() {
+		return dataAlteracao;
+	}
+	public void setDataAlteracao(Calendar dataAlteracao) {
+		this.dataAlteracao = dataAlteracao;
 	}
 }

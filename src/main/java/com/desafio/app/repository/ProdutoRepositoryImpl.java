@@ -1,5 +1,6 @@
 package com.desafio.app.repository;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -18,6 +19,7 @@ public class ProdutoRepositoryImpl implements ProdutoRepository {
 
 	@Override
 	public Produto save(Produto produto) {
+		produto.setDataCriacao(Calendar.getInstance());
 		entityManager.persist(produto);
 		System.out.println("Produto Salvo com Sucesso!");
 		return produto;
@@ -25,7 +27,7 @@ public class ProdutoRepositoryImpl implements ProdutoRepository {
 
 	@Override
 	public Produto find(Long id) {
-		return null;
+		return entityManager.find(Produto.class, id);
 	}
 
 	@Override
@@ -35,9 +37,20 @@ public class ProdutoRepositoryImpl implements ProdutoRepository {
 	}
 
 	@Override
-	public Produto alter(Produto produto) {
+	public Produto alter(Produto produtoAlterado) {
+		Produto produto = find(produtoAlterado.getId());
+		
+		produto.setDataAlteracao(Calendar.getInstance());
+		produto.setMarca(produtoAlterado.getMarca());
+		produto.getMarca().setDataAlteracao(Calendar.getInstance());
+		produto.setDescricao(produtoAlterado.getDescricao());
 		entityManager.merge(produto);
 		return produto;
+	}
+
+	@Override
+	public void delete(Produto produto) {
+		 entityManager.remove(entityManager.contains(produto) ? produto : entityManager.merge(produto));
 	}
 
 }

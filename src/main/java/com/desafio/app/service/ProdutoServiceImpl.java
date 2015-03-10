@@ -1,5 +1,6 @@
 package com.desafio.app.service;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -41,6 +42,11 @@ public class ProdutoServiceImpl implements ProdutoService{
 	@Override
 	public Produto alterProduto(Produto produto) {
 		return produtoRepository.alter(produto);
+	}
+
+	@Override
+	public void deleteProduto(Produto produto) {
+		produtoRepository.delete(produto);
 	}
 	
 	
