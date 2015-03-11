@@ -18,8 +18,8 @@ public class UserRepositoryImpl implements UserRepository {
 	
 	@Override
 	public Usuario saveUser(Usuario usuario) {
+		usuario.setEnabled(true);
 		entityManager.persist(usuario);
-		System.out.println("Usuario salvo com sucesso!");
 		return usuario;
 	}
 
@@ -38,5 +38,12 @@ public class UserRepositoryImpl implements UserRepository {
 	public Usuario alterUser(Usuario user) {
 		entityManager.merge(user);
 		return user;
+	}
+	
+	@Override
+	public boolean disableUser(Usuario user) {
+		user.setEnabled(false);
+		entityManager.merge(user);
+		return true;
 	}
 }

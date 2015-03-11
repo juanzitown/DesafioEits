@@ -1,7 +1,7 @@
 <div ng-controller="produtoController" ng-init="produtoController.findAllMarca()">
 	<md-dialog>
-	
 	  <md-content>
+	  		<div layout layout-align="center"> ALTERAR PRODUTO </div>
 		    <div layout="column">
 				<div layout="row">
 					<md-input-container flex >
@@ -20,7 +20,6 @@
 			    <md-select ng-model="produto.marca" placeholder="{{produto.marca.descricao}}">
 					<md-option ng-value="marca" ng-repeat="marca in produtoController.marcas">{{ marca.descricao }}</md-option>
 		 		</md-select> 
-		 
 			</div>
 	  </md-content>
 	  

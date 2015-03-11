@@ -2,6 +2,7 @@
 	<md-dialog>
 	
 	  <md-content>
+	  		<div layout layout-align="center"> ALTERAR USUARIO </div>
 		    <div layout="column">
 				<div layout="row">
 					<md-input-container flex >

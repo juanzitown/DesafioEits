@@ -9,4 +9,5 @@ public interface UserRepository {
 	public Usuario findUser(Long id);
 	public List<Usuario> findAllUser();
 	public Usuario alterUser(Usuario user);
+	boolean disableUser(Usuario user);
 }

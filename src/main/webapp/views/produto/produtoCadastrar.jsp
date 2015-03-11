@@ -1,4 +1,5 @@
 <div ng-controller="produtoController" ng-init="produtoController.initInsert()">
+<div layout layout-align="center"> CADASTRAR PRODUTO </div>
 	<div layout="column">
 	
 	     <md-input-container flex >

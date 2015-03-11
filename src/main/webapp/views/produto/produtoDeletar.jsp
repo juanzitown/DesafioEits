@@ -2,6 +2,7 @@
 	<md-dialog>
 	
 	  <md-content>
+	  			<div layout layout-align="center"> DELETAR PRODUTO </div>
 				<div layout="row">
 					<md-input-container flex >
 				        <label>Id</label>

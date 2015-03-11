@@ -422,10 +422,12 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
     
     $scope.usuarioController.alterarModal = function(ev, usuario) {
     	$scope.usuarioController.showAdvanced(ev, usuario, $scope.templateAlterarModal);
+    	usuario.op = $scope.ALTERAR;
     }
     
-    $scope.usuarioController.deletarModal = function() {
+    $scope.usuarioController.deletarModal = function(ev, usuario) {
     	$scope.usuarioController.showAdvanced(ev, usuario, $scope.templateDeletarModal);
+    	usuario.op = $scope.DELETAR;
     }
     
     $scope.usuarioController.showAdvanced = function(ev, usuario, template) {
@@ -437,11 +439,17 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
         	  usuario: usuario
           }
         })
-        .then(function(usuarioAlterado) {
-        	if(usuarioAlterado.nome != usuario.nome) {
-        		$scope.usuarioController.alterUsuario(usuarioAlterado);
-        	}
-         	
+        .then(function(usuarioResposta) {
+        	if(usuarioResposta.op == $scope.DELETAR) {
+        		delete usuarioResposta.op;
+        		$scope.usuarioController.disableUsuario(usuarioResposta);
+        		
+        	} else if(usuarioResposta.op == $scope.ALTERAR) {
+        		if(usuarioResposta.nome != usuario.nome) {
+        			delete usuarioResposta.op;
+            		$scope.usuarioController.alterUsuario(usuarioResposta);
+            	}
+        	}         	
         }, function() {
 //        	alert('Modal Cancelada pelo usuario.');
         });
@@ -476,6 +484,19 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
 		  }
 		 });
     };
+    
+    $scope.usuarioController.disableUsuario = function (usuario) {
+    	
+		 usuarioServiceDwr.disableUsuario(usuario, {
+		  callback : function(data){
+			  alert("Usuario desabilitado com sucesso!");
+		  },
+		  errorHandler : function(){
+			// Show a popup message
+				 alert("Não foi possivel cadastrar Usuario");
+		  }
+		 });
+   };
     
     $scope.usuarioController.alterUsuario = function (usuario) {
 		  

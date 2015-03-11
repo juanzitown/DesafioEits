@@ -1,6 +1,7 @@
 <div>
 	<md-dialog>
 	  <md-content>
+	  		<div layout layout-align="center"> ALTERAR MARCA </div>
 		    <div layout="column">
 				<div layout="row">
 					<md-input-container flex >

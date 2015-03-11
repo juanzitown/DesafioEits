@@ -1,4 +1,6 @@
 <div ng-controller="marcaController" ng-init="marcaController.initInsert()">
+	
+	<div layout layout-align="center"> CADASTRAR MARCA </div>
 	<div layout="column">
 	     <md-input-container flex >
 		     <label>Descrição</label>

@@ -1,4 +1,5 @@
 <div ng-controller="usuarioController" ng-init="usuarioController.initInsert()">
+	<div layout layout-align="center"> CADASTRAR USUARIO </div>
 	<div layout="column">
 	
 	     <md-input-container flex >

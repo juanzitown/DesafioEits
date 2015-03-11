@@ -43,6 +43,12 @@ public class UsuarioServiceImpl implements UsuarioService{
 	public Usuario alterUsuario(Usuario user) {
 		return userRepository.alterUser(user);
 	}
+	
+	@Override
+	@RemoteMethod
+	public boolean disableUsuario(Usuario user) {
+		return userRepository.disableUser(user);
+	}
 
 
 }
