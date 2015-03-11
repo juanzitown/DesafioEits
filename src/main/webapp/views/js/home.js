@@ -5,6 +5,7 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
 			      .when('/marca/cadastrar', {
 				    templateUrl: '/app/views/marca/marcaCadastrar.jsp',
 				    controller: 'marcaController'
+				    	
 			      })
 			      .when('/marca/listar', {
 				    templateUrl: '/app/views/marca/marcaListar.jsp',
@@ -27,28 +28,40 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
 				    controller: 'usuarioController'
 			      })
 			      .when('/login', {
-			    	  templateUrl: '/app/views/loginForm.jsp',
-			    	  controller: 'sistemaController'
+			    	  templateUrl: 'j_spring_security_login',
+			    	  controller: 'loginController'
 			      })
 			      .otherwise({
 			    	  redirectTo: "/"
 			      })
  		}])
  		
-// .run( function($rootScope, $location) {
-//	 
-//    // register listener to watch route changes
-//    $rootScope.$on( "$routeChangeStart", function(event, next, current) {
-//      if ( $rootScope.loggedUser == null ) {
-//        // no logged user, we should be going to #login
-//        if ( next.templateUrl != "/loginForm.jsp" ) {
-//          // already going to #login, no redirect needed
-//        	 // not going to #login, we should redirect now
-//            $location.path( "/login" );
-//        }
-//      }         
-//    })
-// })
+ .run( function($rootScope, $location) {
+    // register listener to watch route changes
+    $rootScope.$on( "$routeChangeStart", function(event, next, current) {
+      if ( $rootScope.loggedUser == null ) {
+        // no logged user, we should be going to #login
+        if (next.templateUrl === "/j_spring_security_login" ) {
+          // already going to #login, no redirect needed
+        	 // not going to #login, we should redirect now
+            $location.path( "/j_spring_security_login" );
+        }
+      }         
+    })
+ })
+ 
+ .controller('loginController', function ($rootScope, $scope, $location) {
+	$scope.loginController = {};
+	$scope.loginController.usuario = {};
+	$scope.loggedUser = {};
+	
+	$scope.loginController.logar = function (usuario) {
+		$rootScope.loggedUser = usuario;
+	};
+	
+	
+	
+  })
  		
  .controller('indexController', function ($scope, $location) {
 	  
@@ -68,7 +81,7 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
 	
     $scope.indexController.onClick = function(index) {	
     	if (index == $scope.LOGOUT) {
-    		$location.path("/logout")
+    		$location.path("/j_spring_security_login")
     	}  else if (index == $scope.HOME) {
     		$location.path("/index")
     	} else if (index == $scope.MARCA_CADASTRAR) {

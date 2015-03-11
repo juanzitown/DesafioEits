@@ -14,7 +14,7 @@ public class MarcaController {
 	
 	@RequestMapping(value = "/marca/listar", method = RequestMethod.GET)
 	public String marcaListar() {
-		return "marcaListar";
+		return "/marca/marcaListar";
 	}
 	
 	

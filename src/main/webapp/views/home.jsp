@@ -40,7 +40,7 @@
 		<div layout="column">
 			<md-toolbar>
 				<div layout layout-align="end">
-					<md-button ng-click="indexController.onClick(LOGOUT)" >logout</md-button>
+					<a href="j_spring_security_logout">logout</a>
 				</div>
 		    </md-toolbar>
 				<div layout="row">

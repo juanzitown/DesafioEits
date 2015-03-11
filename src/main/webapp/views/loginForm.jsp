@@ -41,26 +41,24 @@
 
 	<h1>Spring Security Custom Login Form (XML)</h1>
 
-	<div id="divLogin">
+	<div ng-controller="loginController">
 
 		<h3>Login with Username and Password</h3>
 
 		<form name="formLogin" action="j_spring_security_check" method="POST">
-			<table>
-				<tr>
-					<td>User:</td>
-					<td><input type="text" name="j_username" value=''></td>
-				</tr>
-				<tr>
-					<td>Password:</td>
-					<td><input type="password" name="j_password" /></td>
-				</tr>
-				<tr>
-					<td colspan='2'><input name="submit" type="submit" value="Login" /></td>
-				</tr>
-			</table>
-			<br>
-			<span id="resultado"></span>
+		
+			<md-input-container flex >
+			     <label>Username</label>
+			     <input ng-model="usuario.username" name="j_username">
+		    </md-input-container> 
+		    
+		    <md-input-container flex >
+			     <label>Password</label>
+			     <input ng-model="usuario.password" name="j_password">
+		    </md-input-container>
+	     
+			<md-button class="md-raised" ng-click="loginController.logar(usuario)" type="submit">Cadastrar</md-button>
+
 		</form>
 	</div>
 
