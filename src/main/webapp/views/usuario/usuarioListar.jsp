@@ -3,7 +3,7 @@
 	<div layout layout-align="center"> LISTAR USUARIO </div>
 	<div layout="row" layout-margin flex>
 		<div flex ="10"><label>Id</label></div>
-		<div flex ="40"><label>Nome</label></div>
+		<div flex ="40"><label>Email</label></div>
 		<div flex ="30"><label>Habilitado</label></div>
 		<div flex="10"><label>Alterar</label></div>
 		<div flex="10"><label>Desabilitar</label></div>    

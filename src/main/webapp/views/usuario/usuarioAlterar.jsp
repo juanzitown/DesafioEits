@@ -13,7 +13,7 @@
 			    
 			    <div>
 			    	<md-input-container flex >
-			        	<label>Nome</label>
+			        	<label>Email</label>
 			          	<input ng-model="usuario.nome" value="{{usuario.nome}}">
 			        </md-input-container>
 			        

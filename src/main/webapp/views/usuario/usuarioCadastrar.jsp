@@ -3,7 +3,7 @@
 	<div layout="column">
 	
 	     <md-input-container flex >
-	     	<label>Nome</label>
+	     	<label>Email</label>
 	        <input ng-model="usuarioController.cadastrar.usuario.nome">
 	     </md-input-container>
 	     

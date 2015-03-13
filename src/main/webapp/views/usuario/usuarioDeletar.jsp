@@ -11,7 +11,7 @@
 			    </div>
 			    <div>
 			    	<md-input-container flex >
-			        	<label>Nome</label>
+			        	<label>Email</label>
 			          	<input ng-model="usuario.nome" disabled>
 			        </md-input-container>
 			    </div>
