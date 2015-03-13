@@ -26,9 +26,13 @@ public class Usuario implements Serializable{
 	@GeneratedValue
 	@Column(name="id")
 	private Long id;
+	
+	@Column(name="nome", unique=true)
 	private String nome;
 	
+	@Column(name="username", unique=true)
 	private String username;
+	
 	private String password;
 	
 	@ManyToOne

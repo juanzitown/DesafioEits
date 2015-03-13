@@ -493,7 +493,7 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
 		  },
 		  errorHandler : function(){
 			// Show a popup message
-				 alert("Não foi possivel cadastrar Usuario");
+				 alert("Não foi possivel cadastrar Usuario, login já existe ou campo(s) nulo(s)");
 		  }
 		 });
     };
@@ -506,7 +506,7 @@ angular.module('desafio', ['ngMaterial', 'ngRoute'])
 		  },
 		  errorHandler : function(){
 			// Show a popup message
-				 alert("Não foi possivel cadastrar Usuario");
+				 alert("Não foi possivel desabilitar Usuario");
 		  }
 		 });
    };

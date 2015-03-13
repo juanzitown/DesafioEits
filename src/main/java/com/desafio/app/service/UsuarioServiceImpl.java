@@ -24,12 +24,13 @@ public class UsuarioServiceImpl implements UsuarioService{
 	@Autowired
 	private UserRepository userRepository;
 	
-	private Email email = new SimpleEmail();
+	private Email email;
 
 	@Override
 	@RemoteMethod
 	public Usuario saveUsuario(Usuario user) {
 		user = userRepository.saveUser(user);
+		email = new SimpleEmail();
 		
 		try {
 			email.setHostName("smtp.googlemail.com");
